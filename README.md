@@ -1,4 +1,4 @@
-# ✨ My Little Tasks
+# ✨ Prettu's Cute wins
 
 A cute productivity tracker made with love 💕  
 Built with plain HTML + CSS + JS — no server needed!
