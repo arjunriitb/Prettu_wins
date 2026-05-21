@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ My Little Tasks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --bg:         #fff9f4;
+      --blush:      #fadadd;
+      --rose:       #e8909a;
+      --deep:       #c0576a;
+      --sage:       #9dbf9e;
+      --lav:        #c5b8e8;
+      --gold:       #e0a84a;
+      --text:       #3d2b2b;
+      --muted:      #a08888;
+      --card:       rgba(255,255,255,0.82);
+      --border:     rgba(255,255,255,0.9);
+      --sh:         0 4px 24px rgba(180,80,100,0.09);
+      --sh-lg:      0 10px 40px rgba(180,80,100,0.16);
+      --r:          20px;
+    }
+
+    /* ── RESET ── */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Nunito',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* ── DECORATIVE BG ── */
+    body::before{
+      content:'';
+      position:fixed;inset:0;
+      background:
+        radial-gradient(ellipse 60% 50% at 0% 0%,   rgba(253,200,210,0.35) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 40% at 100% 100%,rgba(197,184,232,0.30) 0%,transparent 60%),
+        radial-gradient(ellipse 40% 40% at 60% 40%,  rgba(240,200,160,0.18) 0%,transparent 55%);
+      pointer-events:none;z-index:0;
+    }
+
+    /* ── HEADER ── */
+    header{
+      position:relative;z-index:1;
+      text-align:center;
+      padding:52px 20px 22px;
+    }
+    .site-title{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,5.5vw,3.2rem);
+      font-weight:400;
+      color:var(--deep);
+      letter-spacing:-0.3px;
+    }
+    .site-title em{font-style:italic;}
+    .site-sub{
+      font-size:.85rem;color:var(--muted);
+      font-weight:300;margin-top:5px;
+    }
+    .pill-row{margin-top:16px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .pill{
+      display:inline-flex;align-items:center;gap:7px;
+      padding:8px 20px;border-radius:50px;
+      font-size:.84rem;font-weight:600;
+      transition:transform .2s;cursor:default;
+    }
+    .pill:hover{transform:scale(1.05);}
+    .pill-gold{background:linear-gradient(135deg,#e8c050,var(--gold));color:#fff;box-shadow:0 3px 14px rgba(224,168,74,.38);}
+    .pill-rose{background:linear-gradient(135deg,var(--rose),var(--deep));color:#fff;box-shadow:0 3px 14px rgba(192,87,106,.32);}
+
+    /* ── TABS ── */
+    nav.tabs{
+      position:relative;z-index:1;
+      display:flex;justify-content:center;gap:8px;
+      padding:16px 20px;flex-wrap:wrap;
+    }
+    .tab-btn{
+      padding:9px 22px;border-radius:50px;
+      border:2px solid transparent;
+      background:var(--card);color:var(--muted);
+      font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;
+      cursor:pointer;transition:all .22s;
+      backdrop-filter:blur(12px);box-shadow:var(--sh);
+    }
+    .tab-btn:hover{border-color:var(--blush);color:var(--deep);}
+    .tab-btn.active{
+      background:var(--deep);color:#fff;
+      border-color:var(--deep);
+      box-shadow:0 4px 18px rgba(192,87,106,.38);
+    }
+
+    /* ── LAYOUT ── */
+    .container{
+      position:relative;z-index:1;
+      max-width:880px;margin:0 auto;
+      padding:0 18px 90px;
+    }
+    .tab-sec{display:none;}
+    .tab-sec.active{display:block;animation:fadeUp .28s ease;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── SECTION LABEL ── */
+    .sec-label{
+      font-family:'Playfair Display',serif;
+      font-size:1.1rem;color:var(--deep);
+      margin:30px 0 14px;
+      display:flex;align-items:center;gap:10px;
+    }
+    .sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--blush),transparent);}
+
+    /* ── PROGRESS ── */
+    .progress-wrap{
+      background:var(--card);border-radius:var(--r);
+      padding:16px 20px;box-shadow:var(--sh);
+      border:1.5px solid var(--border);
+      backdrop-filter:blur(10px);margin-bottom:4px;
+    }
+    .progress-meta{
+      display:flex;justify-content:space-between;
+      font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:8px;
+    }
+    .progress-track{background:rgba(0,0,0,.07);border-radius:50px;height:10px;overflow:hidden;}
+    .progress-fill{
+      height:100%;
+      background:linear-gradient(90deg,var(--blush),var(--deep));
+      border-radius:50px;width:0%;
+      transition:width .55s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    /* ── TASK GRID ── */
+    .task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:13px;}
+    .task-card{
+      background:var(--card);border-radius:var(--r);
+      padding:22px 16px 16px;
+      border:1.5px solid var(--border);box-shadow:var(--sh);
+      backdrop-filter:blur(14px);
+      cursor:pointer;position:relative;overflow:hidden;
+      transition:transform .28s cubic-bezier(.34,1.56,.64,1),box-shadow .22s;
+      user-select:none;-webkit-tap-highlight-color:transparent;
+    }
+    .task-card::after{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--blush),var(--lav));
+      opacity:0;transition:opacity .22s;
+    }
+    .task-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);}
+    .task-card:hover::after{opacity:1;}
+    .task-card.done{
+      background:linear-gradient(135deg,rgba(157,191,158,.22),rgba(157,191,158,.08));
+      border-color:rgba(157,191,158,.55);
+    }
+    .task-card.done::after{opacity:1;background:linear-gradient(90deg,var(--sage),#70c474);}
+    .task-check{
+      position:absolute;top:13px;right:13px;
+      width:26px;height:26px;border-radius:50%;
+      border:2px solid var(--blush);
+      display:flex;align-items:center;justify-content:center;
+      font-size:.76rem;color:transparent;
+      transition:all .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .task-card.done .task-check{background:var(--sage);border-color:var(--sage);color:#fff;}
+    .task-icon{font-size:2rem;margin-bottom:9px;display:block;}
+    .task-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;}
+    .task-pts{font-size:.76rem;color:var(--gold);font-weight:700;margin-top:3px;}
+    .task-freq{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:5px;}
+
+    /* ── REEL INPUT ── */
+    .input-card{
+      background:var(--card);border-radius:var(--r);
+      border:1.5px solid var(--border);box-shadow:var(--sh);
+      backdrop-filter:blur(12px);padding:22px;
+    }
+    .input-card h3{font-family:'Playfair Display',serif;font-size:1rem;color:var(--deep);margin-bottom:14px;}
+    .input-row{display:flex;gap:9px;flex-wrap:wrap;}
+    input[type=text],select{
+      padding:11px 14px;
+      border:1.5px solid var(--blush);border-radius:12px;
+      font-family:'Nunito',sans-serif;font-size:.88rem;
+      background:rgba(255,255,255,.88);color:var(--text);
+      outline:none;transition:border-color .2s;
+    }
+    input[type=text]:focus,select:focus{border-color:var(--deep);}
+    input[type=text]{flex:1;min-width:150px;}
+    select{min-width:140px;cursor:pointer;}
+
+    /* ── BUTTONS ── */
+    .btn{
+      padding:11px 22px;border-radius:12px;border:none;
+      font-family:'Nunito',sans-serif;font-size:.86rem;font-weight:700;
+      cursor:pointer;transition:all .2s;
+    }
+    .btn-primary{background:var(--deep);color:#fff;box-shadow:0 3px 12px rgba(192,87,106,.32);}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,87,106,.40);}
+    .btn-sage{background:var(--sage);color:#fff;}
+    .btn-ghost{background:rgba(0,0,0,.06);color:var(--muted);}
+    .btn-ghost:hover{background:rgba(0,0,0,.11);}
+    .btn-sm{padding:6px 13px;font-size:.76rem;border-radius:8px;}
+    .btn-full{width:100%;margin-top:10px;}
+
+    /* ── REEL LIST ── */
+    .reel-list{display:flex;flex-direction:column;gap:10px;}
+    .reel-item{
+      background:var(--card);border-radius:14px;
+      padding:14px 16px;border:1.5px solid var(--border);box-shadow:var(--sh);
+      display:flex;align-items:center;gap:11px;
+      transition:transform .2s;
+    }
+    .reel-item:hover{transform:translateX(5px);}
+    .reel-item.used{opacity:.42;}
+    .reel-text{flex:1;font-size:.88rem;}
+    .reel-text.struck{text-decoration:line-through;}
+    .badge{
+      font-size:.68rem;padding:3px 10px;border-radius:50px;
+      font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;
+    }
+    .badge-bf{background:rgba(197,184,232,.3);color:#7a5daa;}
+    .badge-me{background:rgba(253,200,210,.4);color:var(--deep);}
+    .reel-actions{display:flex;gap:6px;flex-shrink:0;}
+    .empty{
+      text-align:center;padding:38px 20px;
+      color:var(--muted);font-family:'Playfair Display',serif;
+      font-style:italic;font-size:.95rem;grid-column:1/-1;
+    }
+
+    /* ── REWARDS ── */
+    .rewards-note{
+      background:var(--card);border-radius:var(--r);
+      border:1.5px solid var(--border);box-shadow:var(--sh);
+      padding:20px 24px;text-align:center;
+    }
+    .rewards-note p{font-size:.88rem;color:var(--muted);}
+    .cat-gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
+      gap:14px;margin-top:4px;
+    }
+    .cat-card{
+      background:var(--card);border-radius:16px;overflow:hidden;
+      border:2px solid var(--border);box-shadow:var(--sh);
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .cat-card:hover{transform:scale(1.05) rotate(-1.3deg);}
+    .cat-card img{width:100%;height:185px;object-fit:cover;display:block;}
+    .cat-lbl{
+      padding:8px 10px;text-align:center;
+      font-family:'Playfair Display',serif;font-style:italic;
+      font-size:.78rem;color:var(--muted);
+    }
+
+    /* ── MODAL ── */
+    .modal-bg{
+      position:fixed;inset:0;
+      background:rgba(60,20,30,.48);backdrop-filter:blur(10px);
+      z-index:9000;display:none;
+      align-items:center;justify-content:center;padding:20px;
+    }
+    .modal-bg.open{display:flex;}
+    .modal{
+      background:var(--bg);border-radius:26px;
+      padding:36px 30px;max-width:360px;width:100%;
+      text-align:center;
+      box-shadow:0 28px 80px rgba(100,20,40,.24);
+      animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+    .modal-emoji{font-size:2.2rem;display:block;margin-bottom:6px;animation:wiggle 1s ease;}
+    @keyframes wiggle{0%,100%{transform:rotate(0)}30%{transform:rotate(-14deg)}60%{transform:rotate(12deg)}}
+    .modal-title{font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--deep);}
+    .modal-sub{font-size:.84rem;color:var(--muted);margin:8px 0 14px;}
+    .modal-img-wrap{border-radius:14px;overflow:hidden;border:2px solid var(--blush);margin-bottom:4px;}
+    .modal-img-wrap img{width:100%;max-height:250px;object-fit:cover;display:block;}
+
+    /* ── TOAST ── */
+    .toast-zone{
+      position:fixed;top:16px;right:16px;
+      z-index:9999;display:flex;flex-direction:column;gap:8px;
+      pointer-events:none;
+    }
+    .toast{
+      background:#fff;border-left:4px solid var(--sage);
+      padding:12px 16px;border-radius:12px;
+      box-shadow:0 5px 20px rgba(0,0,0,.10);
+      font-size:.84rem;min-width:190px;max-width:270px;
+      pointer-events:auto;
+      animation:tIn .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .toast.err{border-color:var(--rose);}
+    @keyframes tIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+    @keyframes tOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
+
+    /* ── MOBILE ── */
+    @media(max-width:500px){
+      .task-grid{grid-template-columns:1fr 1fr;}
+      .input-row{flex-direction:column;}
+      select{min-width:unset;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1 class="site-title">✨ <em>My Little Tasks</em> ✨</h1>
+    <p class="site-sub">your daily sprinkle of productivity 🌸</p>
+    <div class="pill-row">
+      <div class="pill pill-gold">⭐ <span id="totalPts">0</span> points</div>
+      <div class="pill pill-rose">🐱 <span id="totalCats">0</span> cat rewards</div>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="tasks">📋 My Tasks</button>
+    <button class="tab-btn" data-tab="reels">🎬 Reel Ideas</button>
+    <button class="tab-btn" data-tab="rewards">🐱 Rewards</button>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <!-- TASKS -->
+    <section class="tab-sec active" id="tab-tasks">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span>Next cat reward 🐾</span>
+          <span id="progText">0 / 50 pts</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progFill"></div></div>
+      </div>
+
+      <h2 class="sec-label">📅 Daily Tasks</h2>
+      <div class="task-grid" id="dailyGrid"></div>
+
+      <h2 class="sec-label">🗓️ Weekly Task</h2>
+      <div class="task-grid" id="weeklyGrid"></div>
+    </section>
+
+    <!-- REELS -->
+    <section class="tab-sec" id="tab-reels">
+      <div class="input-card">
+        <h3>💡 Add a Reel Idea</h3>
+        <div class="input-row">
+          <input id="reelInput" type="text" placeholder="e.g. morning GRWM with lo-fi…" maxlength="200"/>
+          <select id="reelBy">
+            <option value="boyfriend">💌 From Babe</option>
+            <option value="me">✍️ My Idea</option>
+          </select>
+          <button class="btn btn-primary" onclick="addReel()">Add</button>
+        </div>
+      </div>
+
+      <h2 class="sec-label">🎬 All Ideas</h2>
+      <div class="reel-list" id="reelList"></div>
+    </section>
+
+    <!-- REWARDS -->
+    <section class="tab-sec" id="tab-rewards">
+      <div class="rewards-note">
+        <p>Every <strong>50 points</strong> = 1 cute cat pic reward 🐾</p>
+        <p style="margin-top:5px;font-size:.8rem">Keep completing tasks to unlock more!</p>
+      </div>
+      <h2 class="sec-label">🐾 Your Cat Collection</h2>
+      <div class="cat-gallery" id="catGallery"></div>
+    </section>
+
+  </div>
+
+  <!-- REWARD MODAL -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal">
+      <span class="modal-emoji">🎉</span>
+      <h2 class="modal-title">You earned a reward!</h2>
+      <p class="modal-sub" id="modalMsg"></p>
+      <div class="modal-img-wrap"><img id="modalImg" src="" alt="cute cat"/></div>
+      <button class="btn btn-primary btn-full" onclick="closeModal()">Yay, thank you! 🐱</button>
+    </div>
+  </div>
+
+  <!-- TOASTS -->
+  <div class="toast-zone" id="toastZone"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   🐱  CAT IMAGES — add your filenames here!
+   ───────────────────────────────────────────
+   1. Drop .jpg / .png files into images/cats/
+   2. Add each filename to this array below
+   ═══════════════════════════════════════════ */
+const CAT_IMAGES = [
+  "images/cats/cat1.jpg",
+  "images/cats/cat2.jpg",
+  "images/cats/cat3.jpg",
+  // "images/cats/fluffy.png",  ← uncomment & add more!
+];
+
+/* ───────────────────────────────────────────
+   TASK DEFINITIONS  (edit freely)
+   ─────────────────────────────────────────── */
+const TASKS = [
+  { id:1, name:"Study Session", icon:"📚", freq:"daily",  pts:20 },
+  { id:2, name:"Reading",       icon:"📖", freq:"daily",  pts:15 },
+  { id:3, name:"Walk Outside",  icon:"🚶‍♀️", freq:"daily",  pts:15 },
+  { id:4, name:"Gym Workout",   icon:"🏋️‍♀️", freq:"daily",  pts:25 },
+  { id:5, name:"Cook a Meal",   icon:"🍳", freq:"daily",  pts:20 },
+  { id:6, name:"Create a Reel", icon:"🎬", freq:"daily",  pts:35 },
+  { id:7, name:"Clean the Room",icon:"🧹", freq:"weekly", pts:30 },
+];
+
+const PTS_PER_REWARD = 50;
+
+/* ── STATE ── */
+function load() {
+  try { const r = localStorage.getItem("mlt_v2"); if(r) return JSON.parse(r); } catch(_){}
+  return { completions:{}, reels:[], totalPts:0, catsEarned:0, nextReelId:1 };
+}
+function save(s){ localStorage.setItem("mlt_v2", JSON.stringify(s)); }
+let S = load();
+
+/* ── DATE KEYS ── */
+function todayKey(){ return new Date().toISOString().slice(0,10); }
+function weekKey(){
+  const d=new Date(), jan1=new Date(d.getFullYear(),0,1);
+  const wk=Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7);
+  return `${d.getFullYear()}-W${wk}`;
+}
+function compKey(task){
+  return task.freq==="daily" ? `${task.id}-${todayKey()}` : `${task.id}-${weekKey()}`;
+}
+
+/* ── RENDER TASKS ── */
+function renderTasks(){
+  const daily  = TASKS.filter(t=>t.freq==="daily");
+  const weekly = TASKS.filter(t=>t.freq==="weekly");
+  document.getElementById("dailyGrid").innerHTML  = daily.map(cardHTML).join("") || `<p class="empty">No daily tasks yet!</p>`;
+  document.getElementById("weeklyGrid").innerHTML = weekly.map(cardHTML).join("") || `<p class="empty">No weekly tasks yet!</p>`;
+}
+
+function cardHTML(t){
+  const key  = compKey(t);
+  const done = !!S.completions[key];
+  return `
+    <div class="task-card ${done?"done":""}" onclick="toggleTask(${t.id})">
+      <div class="task-check">✓</div>
+      <span class="task-icon">${t.icon}</span>
+      <div class="task-name">${t.name}</div>
+      <div class="task-pts">+${t.pts} pts</div>
+      <div class="task-freq">${t.freq}</div>
+    </div>`;
+}
+
+function toggleTask(id){
+  const task = TASKS.find(t=>t.id===id);
+  if(!task) return;
+  const key = compKey(task);
+  if(S.completions[key]){
+    delete S.completions[key];
+    S.totalPts = Math.max(0, S.totalPts - task.pts);
+    save(S); renderAll();
+  } else {
+    const oldCats = Math.floor(S.totalPts / PTS_PER_REWARD);
+    S.completions[key] = Date.now();
+    S.totalPts += task.pts;
+    const newCats = Math.floor(S.totalPts / PTS_PER_REWARD);
+    const earned  = newCats - oldCats;
+    if(earned > 0){
+      S.catsEarned += earned;
+      save(S); renderAll();
+      showRewardModal(task.pts);
+    } else {
+      save(S); renderAll();
+      toast(`✨ +${task.pts} pts — nice work!`);
+    }
+  }
+}
+
+/* ── PROGRESS BAR ── */
+function renderProgress(){
+  const cur = S.totalPts % PTS_PER_REWARD;
+  const pct = (cur / PTS_PER_REWARD) * 100;
+  document.getElementById("progFill").style.width = pct + "%";
+  document.getElementById("progText").textContent = `${cur} / ${PTS_PER_REWARD} pts`;
+}
+
+/* ── HEADER PILLS ── */
+function renderPills(){
+  document.getElementById("totalPts").textContent  = S.totalPts;
+  document.getElementById("totalCats").textContent = S.catsEarned;
+}
+
+/* ── REEL IDEAS ── */
+function renderReels(){
+  const el = document.getElementById("reelList");
+  if(!S.reels.length){ el.innerHTML=`<p class="empty">No ideas yet — add some above! 🎬</p>`; return; }
+  el.innerHTML = S.reels.map(r=>`
+    <div class="reel-item ${r.used?"used":""}">
+      <span style="font-size:1.2rem">${r.used?"✅":"🎬"}</span>
+      <span class="reel-text ${r.used?"struck":""}">${esc(r.idea)}</span>
+      <span class="badge ${r.by==="boyfriend"?"badge-bf":"badge-me"}">
+        ${r.by==="boyfriend"?"💌 babe":"✍️ me"}
+      </span>
+      <div class="reel-actions">
+        ${!r.used?`<button class="btn btn-sm btn-sage" onclick="markUsed(${r.id})">Used ✓</button>`:""}
+        <button class="btn btn-sm btn-ghost" onclick="deleteReel(${r.id})">✕</button>
+      </div>
+    </div>`).join("");
+}
+
+function addReel(){
+  const val = document.getElementById("reelInput").value.trim();
+  if(!val){ toast("Type an idea first! 💭","err"); return; }
+  S.reels.unshift({ id:S.nextReelId++, idea:val, by:document.getElementById("reelBy").value, used:false, ts:Date.now() });
+  document.getElementById("reelInput").value="";
+  save(S); renderReels();
+  toast("Reel idea added! 🎬");
+}
+
+function markUsed(id){
+  const r = S.reels.find(r=>r.id===id);
+  if(r){ r.used=true; save(S); renderReels(); toast("Marked as used! ✅"); }
+}
+
+function deleteReel(id){
+  S.reels = S.reels.filter(r=>r.id!==id);
+  save(S); renderReels();
+}
+
+/* ── CAT GALLERY ── */
+function renderRewards(){
+  const el = document.getElementById("catGallery");
+  if(!S.catsEarned){ el.innerHTML=`<p class="empty">Complete tasks to earn cat pics! 🐈</p>`; return; }
+  let html="";
+  for(let i=0;i<S.catsEarned;i++){
+    const src = CAT_IMAGES.length ? CAT_IMAGES[i % CAT_IMAGES.length] : "";
+    html += `
+      <div class="cat-card">
+        <img src="${src}" alt="cat reward ${i+1}" onerror="this.style.height='60px'"/>
+        <div class="cat-lbl">Reward #${i+1} 🐾</div>
+      </div>`;
+  }
+  el.innerHTML = html;
+}
+
+/* ── REWARD MODAL ── */
+function showRewardModal(pts){
+  const src = CAT_IMAGES.length ? CAT_IMAGES[Math.floor(Math.random()*CAT_IMAGES.length)] : "";
+  document.getElementById("modalMsg").textContent = `+${pts} pts — you're amazing! 🌟`;
+  document.getElementById("modalImg").src = src;
+  document.getElementById("modalBg").classList.add("open");
+}
+function closeModal(){ document.getElementById("modalBg").classList.remove("open"); }
+
+/* ── TOAST ── */
+function toast(msg, type=""){
+  const z = document.getElementById("toastZone");
+  const el = document.createElement("div");
+  el.className = "toast"+(type?" "+type:"");
+  el.textContent = msg;
+  z.appendChild(el);
+  setTimeout(()=>{ el.style.animation="tOut .3s forwards"; setTimeout(()=>el.remove(),300); }, 2800);
+}
+
+/* ── TABS ── */
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".tab-sec").forEach(s=>s.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-"+btn.dataset.tab).classList.add("active");
+    if(btn.dataset.tab==="rewards") renderRewards();
+  });
+});
+
+/* ── ENTER KEY on reel input ── */
+document.getElementById("reelInput").addEventListener("keydown",e=>{ if(e.key==="Enter") addReel(); });
+
+/* ── HELPERS ── */
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ── BOOT ── */
+function renderAll(){ renderPills(); renderProgress(); renderTasks(); renderReels(); }
+renderAll();
+</script>
+</body>
+</html>
