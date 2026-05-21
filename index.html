@@ -22,8 +22,6 @@
       radial-gradient(ellipse 50% 40% at 100% 100%,rgba(167,139,250,0.25) 0%,transparent 60%),
       radial-gradient(ellipse 40% 40% at 60% 40%,rgba(216,180,254,0.20) 0%,transparent 55%);
       pointer-events:none;z-index:0;}
-
-    /* HEADER */
     header{position:relative;z-index:1;text-align:center;padding:48px 20px 18px;}
     .site-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:400;color:var(--deep);}
     .site-title em{font-style:italic;}
@@ -33,28 +31,20 @@
     .pill:hover{transform:scale(1.05);}
     .pill-gold{background:linear-gradient(135deg,#c084fc,#7c3aed);color:#fff;box-shadow:0 3px 14px rgba(124,58,237,.35);}
     .pill-rose{background:linear-gradient(135deg,#a855f7,#5b21b6);color:#fff;box-shadow:0 3px 14px rgba(91,33,182,.32);}
-
-    /* TABS */
     nav.tabs{position:relative;z-index:1;display:flex;justify-content:center;gap:7px;padding:14px 20px;flex-wrap:wrap;}
     .tab-btn{padding:8px 18px;border-radius:50px;border:2px solid transparent;background:var(--card);color:var(--muted);font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .22s;backdrop-filter:blur(12px);box-shadow:var(--sh);}
     .tab-btn:hover{border-color:var(--blush);color:var(--deep);}
     .tab-btn.active{background:var(--deep);color:#fff;border-color:var(--deep);box-shadow:0 4px 18px rgba(124,58,237,.38);}
-
-    /* LAYOUT */
     .container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 16px 100px;}
     .tab-sec{display:none;}
     .tab-sec.active{display:block;animation:fadeUp .28s ease;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     .sec-label{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--deep);margin:26px 0 13px;display:flex;align-items:center;gap:10px;}
     .sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--blush),transparent);}
-
-    /* PROGRESS */
     .progress-wrap{background:var(--card);border-radius:var(--r);padding:15px 18px;box-shadow:var(--sh);border:1.5px solid var(--border);backdrop-filter:blur(10px);margin-bottom:4px;}
     .progress-meta{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:7px;}
     .progress-track{background:rgba(0,0,0,.07);border-radius:50px;height:9px;overflow:hidden;}
     .progress-fill{height:100%;background:linear-gradient(90deg,var(--blush),var(--deep));border-radius:50px;width:0%;transition:width .55s cubic-bezier(.34,1.56,.64,1);}
-
-    /* TASK GRID */
     .task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
     .task-card{background:var(--card);border-radius:var(--r);padding:20px 15px 15px;border:1.5px solid var(--border);box-shadow:var(--sh);backdrop-filter:blur(14px);cursor:pointer;position:relative;overflow:hidden;transition:transform .28s cubic-bezier(.34,1.56,.64,1),box-shadow .22s;user-select:none;-webkit-tap-highlight-color:transparent;}
     .task-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blush),var(--lav));opacity:0;transition:opacity .22s;}
@@ -70,8 +60,6 @@
     .task-freq{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:4px;}
     .task-note-snippet{margin-top:7px;font-size:.70rem;color:var(--muted);font-style:italic;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
     .task-add-note{margin-top:7px;font-size:.70rem;color:var(--deep);font-weight:700;opacity:.65;text-decoration:underline dotted;cursor:pointer;pointer-events:auto;}
-
-    /* FORMS */
     .input-card{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh);backdrop-filter:blur(12px);padding:20px;}
     .input-card h3{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--deep);margin-bottom:12px;}
     .input-row{display:flex;gap:8px;flex-wrap:wrap;}
@@ -81,8 +69,6 @@
     select{min-width:130px;cursor:pointer;}
     textarea{width:100%;resize:vertical;min-height:68px;border-radius:11px;}
     label.form-lbl{font-size:.76rem;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;margin-top:10px;}
-
-    /* BUTTONS */
     .btn{padding:10px 20px;border-radius:11px;border:none;font-family:'Nunito',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;transition:all .2s;}
     .btn-primary{background:var(--deep);color:#fff;box-shadow:0 3px 12px rgba(124,58,237,.30);}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,58,237,.40);}
@@ -95,8 +81,6 @@
     .btn-outline:hover{background:var(--deep);color:#fff;}
     .btn-sm{padding:5px 12px;font-size:.74rem;border-radius:8px;}
     .btn-full{width:100%;margin-top:10px;}
-
-    /* REELS */
     .reel-list{display:flex;flex-direction:column;gap:9px;}
     .reel-item{background:var(--card);border-radius:13px;padding:13px 15px;border:1.5px solid var(--border);box-shadow:var(--sh);display:flex;align-items:center;gap:10px;transition:transform .2s;}
     .reel-item:hover{transform:translateX(4px);}
@@ -107,16 +91,12 @@
     .badge-bf{background:rgba(197,184,232,.3);color:#7c3aed;}
     .badge-me{background:rgba(232,216,255,.4);color:var(--deep);}
     .reel-actions{display:flex;gap:5px;flex-shrink:0;}
-
-    /* SETTINGS */
     .settings-card{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh);padding:22px;margin-bottom:14px;}
     .settings-card h3{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--deep);margin-bottom:5px;}
     .settings-card p{font-size:.80rem;color:var(--muted);margin-bottom:12px;line-height:1.5;}
     .settings-row{display:flex;gap:9px;flex-wrap:wrap;}
     .info-box{background:rgba(124,58,237,.07);border:1.5px solid rgba(124,58,237,.18);border-radius:14px;padding:14px 16px;font-size:.82rem;color:var(--text);line-height:1.6;margin-bottom:14px;}
     .info-box strong{color:var(--deep);}
-
-    /* REWARDS */
     .rewards-note{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh);padding:18px 22px;text-align:center;}
     .rewards-note p{font-size:.86rem;color:var(--muted);}
     .cat-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:13px;margin-top:4px;}
@@ -124,26 +104,18 @@
     .cat-card:hover{transform:scale(1.05) rotate(-1.2deg);}
     .cat-card img{width:100%;height:175px;object-fit:cover;display:block;}
     .cat-lbl{padding:7px 9px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:.76rem;color:var(--muted);}
-
-    /* HISTORY REPORT */
     .report-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:11px;margin-bottom:4px;}
     .stat-card{background:var(--card);border-radius:15px;padding:16px 12px;text-align:center;border:1.5px solid var(--border);box-shadow:var(--sh);}
     .stat-num{font-family:'Playfair Display',serif;font-size:1.75rem;color:var(--deep);font-weight:700;}
     .stat-lbl{font-size:.70rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
-
-    /* EXPORT */
     .export-card{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh);padding:20px;margin-bottom:4px;}
     .export-card h3{font-family:'Playfair Display',serif;font-size:.98rem;color:var(--deep);margin-bottom:12px;}
     .date-range-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;}
     .date-field{display:flex;flex-direction:column;gap:4px;}
     .date-field label{font-size:.74rem;font-weight:700;color:var(--muted);}
-
-    /* FILTER */
     .filter-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px;}
     .filter-btn{padding:6px 14px;border-radius:50px;border:1.5px solid var(--blush);background:var(--card);color:var(--muted);font-family:'Nunito',sans-serif;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .18s;}
     .filter-btn.active,.filter-btn:hover{background:var(--deep);color:#fff;border-color:var(--deep);}
-
-    /* LOG */
     .day-block{margin-bottom:16px;}
     .day-heading{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--deep);font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:8px;}
     .day-pts-badge{font-size:.68rem;padding:2px 9px;border-radius:50px;background:var(--lavlight);color:var(--deep);font-weight:700;font-family:'Nunito',sans-serif;}
@@ -154,8 +126,6 @@
     .log-time{font-size:.66rem;color:var(--muted);margin-top:1px;}
     .log-note{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:5px;line-height:1.4;background:rgba(124,58,237,.05);border-left:2px solid var(--lav);padding:4px 8px;border-radius:0 7px 7px 0;}
     .log-pts{font-size:.70rem;color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px;}
-
-    /* TRAVEL DIARY */
     .trip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-top:4px;}
     .trip-card{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh);overflow:hidden;transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
     .trip-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg);}
@@ -171,8 +141,6 @@
     .trip-actions{margin-top:12px;display:flex;gap:7px;}
     .trip-photos-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-top:8px;}
     .trip-thumb{width:70px;height:70px;object-fit:cover;border-radius:10px;flex-shrink:0;border:2px solid var(--blush);}
-
-    /* MODALS */
     .modal-bg{position:fixed;inset:0;background:rgba(30,10,60,.52);backdrop-filter:blur(10px);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;}
     .modal-bg.open{display:flex;}
     .modal{background:var(--bg);border-radius:24px;padding:32px 26px;max-width:420px;width:100%;text-align:center;box-shadow:0 28px 80px rgba(60,20,120,.26);animation:popIn .38s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;}
@@ -187,23 +155,16 @@
     .modal-text-left{text-align:left;}
     .modal-btn-row{display:flex;gap:9px;margin-top:14px;}
     .modal-btn-row .btn{flex:1;}
-    .confirm-modal .modal-btn-row .btn{flex:1;}
-
-    /* LINK LIST in trip modal */
     .link-list{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
     .link-row{display:flex;gap:6px;align-items:center;}
     .link-row input{flex:1;}
     .link-row .btn-sm{flex-shrink:0;}
-
-    /* TOAST */
     .toast-zone{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:7px;pointer-events:none;}
     .toast{background:#fff;border-left:4px solid var(--sage);padding:11px 15px;border-radius:11px;box-shadow:0 5px 20px rgba(0,0,0,.10);font-size:.82rem;min-width:180px;max-width:260px;pointer-events:auto;animation:tIn .3s cubic-bezier(.34,1.56,.64,1);}
     .toast.err{border-color:var(--rose);}
     @keyframes tIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
     @keyframes tOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
-
     .empty{text-align:center;padding:36px 20px;color:var(--muted);font-family:'Playfair Display',serif;font-style:italic;font-size:.92rem;grid-column:1/-1;}
-
     @media(max-width:520px){
       .task-grid{grid-template-columns:1fr 1fr;}
       .input-row,.date-range-row{flex-direction:column;}
@@ -277,8 +238,6 @@
   <!-- HISTORY -->
   <section class="tab-sec" id="tab-history">
     <div class="report-summary" id="reportSummary"></div>
-
-    <!-- EXPORT -->
     <h2 class="sec-label">📥 Download Report</h2>
     <div class="export-card">
       <h3>Choose a date range to export</h3>
@@ -288,7 +247,6 @@
         <button class="btn btn-primary" onclick="exportReport()">⬇️ Download</button>
       </div>
     </div>
-
     <h2 class="sec-label">📅 Activity Log</h2>
     <div class="filter-row" id="filterRow"></div>
     <div id="historyLog"></div>
@@ -335,11 +293,9 @@
 
   <!-- SETTINGS -->
   <section class="tab-sec" id="tab-settings">
-
     <div class="info-box">
       💡 <strong>Daily reset tip:</strong> At the end of each day, tap "Reset Today's Tasks" below — your history and notes are always saved permanently. The next day you start fresh, complete your tasks again, and keep earning points!
     </div>
-
     <div class="settings-card">
       <h3>🔄 Reset Daily Tasks</h3>
       <p>Clears today's checkmarks so you can do them again tomorrow. Your history log, points, and notes stay safe forever.</p>
@@ -347,7 +303,6 @@
         <button class="btn btn-primary" onclick="confirmAction('resetDaily')">Reset Today's Tasks</button>
       </div>
     </div>
-
     <div class="settings-card">
       <h3>🗓️ Reset Weekly Task</h3>
       <p>Clears this week's task (like Clean the Room) so it can be done again next week. Everything else is preserved.</p>
@@ -355,7 +310,6 @@
         <button class="btn btn-ghost" onclick="confirmAction('resetWeekly')">Reset Weekly Task</button>
       </div>
     </div>
-
     <div class="settings-card">
       <h3>⭐ Reset Points & Rewards</h3>
       <p>Resets your points and cat reward count to zero. Your history log and diary entries are kept.</p>
@@ -363,7 +317,6 @@
         <button class="btn btn-ghost" onclick="confirmAction('resetPoints')">Reset Points & Cats</button>
       </div>
     </div>
-
   </section>
 </div>
 
@@ -416,10 +369,8 @@
 <div class="toast-zone" id="toastZone"></div>
 
 <script>
-/* ═══ CAT IMAGES ═══ */
 const CAT_IMAGES=["images/cats/cat1.jpg","images/cats/cat2.jpg","images/cats/cat3.jpg"];
 
-/* ═══ TASK DEFINITIONS ═══ */
 const TASKS=[
   {id:1,name:"Study Session",icon:"📚",freq:"daily",pts:20,notePlaceholder:"What did you study today?",noteLabel:"📚 What I studied"},
   {id:2,name:"Reading",icon:"📖",freq:"daily",pts:15,notePlaceholder:"What did you read?",noteLabel:"📖 What I read"},
@@ -431,7 +382,6 @@ const TASKS=[
 ];
 const PTS_PER_REWARD=50;
 
-/* ═══ STATE ═══ */
 function load(){
   try{const r=localStorage.getItem("pcw_v1");if(r)return JSON.parse(r);}catch(_){}
   return{completions:{},notes:{},log:[],reels:[],trips:[],totalPts:0,catsEarned:0,nextReelId:1,nextTripId:1};
@@ -441,7 +391,6 @@ let S=load();
 if(!S.log)S.log=[];if(!S.notes)S.notes={};if(!S.trips)S.trips=[];
 if(!S.nextTripId)S.nextTripId=1;
 
-/* ═══ DATE HELPERS ═══ */
 function todayKey(){return new Date().toISOString().slice(0,10);}
 function weekKey(){const d=new Date(),j=new Date(d.getFullYear(),0,1);const w=Math.ceil(((d-j)/86400000+j.getDay()+1)/7);return `${d.getFullYear()}-W${w}`;}
 function compKey(t){return t.freq==="daily"?`${t.id}-${todayKey()}`:`${t.id}-${weekKey()}`;}
@@ -450,7 +399,6 @@ function fmtDate(iso){const d=new Date(iso+"T00:00:00");return d.toLocaleDateStr
 function fmtDateShort(iso){const d=new Date(iso+"T00:00:00");return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});}
 function fmtTime(ts){return new Date(ts).toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});}
 
-/* ═══ TASKS ═══ */
 function renderTasks(){
   document.getElementById("dailyGrid").innerHTML=TASKS.filter(t=>t.freq==="daily").map(cardHTML).join("")||`<p class="empty">No daily tasks!</p>`;
   document.getElementById("weeklyGrid").innerHTML=TASKS.filter(t=>t.freq==="weekly").map(cardHTML).join("")||`<p class="empty">No weekly tasks!</p>`;
@@ -493,7 +441,6 @@ function toggleTask(id){
   }
 }
 
-/* ═══ NOTE MODAL ═══ */
 let _noteTaskId=null;
 function openNoteModal(id){
   const t=TASKS.find(t=>t.id===id);if(!t)return;
@@ -515,7 +462,6 @@ function saveNote(){
   save(S);closeNoteModal();renderTasks();
 }
 
-/* ═══ PROGRESS / PILLS ═══ */
 function renderProgress(){
   const cur=S.totalPts%PTS_PER_REWARD;
   document.getElementById("progFill").style.width=(cur/PTS_PER_REWARD*100)+"%";
@@ -526,7 +472,6 @@ function renderPills(){
   document.getElementById("totalCats").textContent=S.catsEarned;
 }
 
-/* ═══ REELS ═══ */
 function renderReels(){
   const el=document.getElementById("reelList");
   if(!S.reels.length){el.innerHTML=`<p class="empty">No ideas yet! 🎬</p>`;return;}
@@ -551,7 +496,6 @@ function addReel(){
 function markUsed(id){const r=S.reels.find(r=>r.id===id);if(r){r.used=true;save(S);renderReels();toast("Marked as used! ✅");}}
 function deleteReel(id){S.reels=S.reels.filter(r=>r.id!==id);save(S);renderReels();}
 
-/* ═══ CAT GALLERY ═══ */
 function renderRewards(){
   const el=document.getElementById("catGallery");
   if(!S.catsEarned){el.innerHTML=`<p class="empty">Complete tasks to earn cat pics! 🐈</p>`;return;}
@@ -563,7 +507,6 @@ function renderRewards(){
   el.innerHTML=h;
 }
 
-/* ═══ REWARD MODAL ═══ */
 function showRewardModal(pts){
   const src=CAT_IMAGES.length?CAT_IMAGES[Math.floor(Math.random()*CAT_IMAGES.length)]:"";
   document.getElementById("modalMsg").textContent=`+${pts} pts — you're amazing! 🌟`;
@@ -572,7 +515,6 @@ function showRewardModal(pts){
 }
 function closeRewardModal(){document.getElementById("rewardModalBg").classList.remove("open");}
 
-/* ═══ HISTORY ═══ */
 let _activeFilter="all";
 function renderHistory(){renderReportSummary();renderFilterRow();renderLogEntries();}
 
@@ -641,23 +583,18 @@ function renderLogEntries(){
   el.innerHTML=h;
 }
 
-/* ═══ EXPORT REPORT ═══ */
 function exportReport(){
   const from=document.getElementById("exportFrom").value;
   const to=document.getElementById("exportTo").value;
   if(!from||!to){toast("Pick a date range first!","err");return;}
   if(from>to){toast("'From' must be before 'To'!","err");return;}
-
   const entries=S.log.filter(e=>e.date>=from&&e.date<=to);
   if(!entries.length){toast("No entries in that range!","err");return;}
-
-  // Group by date
   const byDate={};
   entries.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
   const totalPts=entries.reduce((s,e)=>s+e.pts,0);
   const uniqueDays=Object.keys(byDate).length;
   const tc={};entries.forEach(e=>{tc[e.taskName]=(tc[e.taskName]||0)+1;});
-
   let html=`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
   <title>My Achievement Report ${from} to ${to}</title>
   <style>
@@ -685,7 +622,6 @@ function exportReport(){
     <div class="s"><div class="sn">${uniqueDays}</div><div class="sl">Active Days</div></div>
     ${Object.entries(tc).map(([n,c])=>`<div class="s"><div class="sn">${c}</div><div class="sl">${n}</div></div>`).join("")}
   </div>`;
-
   for(const date of Object.keys(byDate).sort().reverse()){
     const de=byDate[date];
     html+=`<div class="day"><div class="dh">${fmtDate(date)}</div>`;
@@ -701,7 +637,6 @@ function exportReport(){
     html+="</div>";
   }
   html+=`<footer>Generated by Prettu Cute Wins 🌸 on ${new Date().toLocaleDateString("en-IN")}</footer></body></html>`;
-
   const blob=new Blob([html],{type:"text/html"});
   const url=URL.createObjectURL(blob);
   const a=document.createElement("a");
@@ -710,7 +645,6 @@ function exportReport(){
   toast("Report downloaded! 📥");
 }
 
-/* ═══ TRAVEL DIARY ═══ */
 function addLinkField(){
   const list=document.getElementById("tripLinkList");
   const row=document.createElement("div");
@@ -725,14 +659,11 @@ function addTrip(){
   const note=document.getElementById("tripNote").value.trim();
   if(!place){toast("Enter a place name!","err");return;}
   if(!date){toast("Pick a date!","err");return;}
-
   const links=[...document.querySelectorAll(".trip-link-input")].map(i=>i.value.trim()).filter(Boolean);
   const fileInput=document.getElementById("tripPhotos");
   const files=[...fileInput.files];
-
   const tripId=S.nextTripId++;
   const trip={id:tripId,place,date,note,links,photos:[],ts:Date.now()};
-
   if(files.length){
     let loaded=0;
     files.forEach(f=>{
@@ -781,6 +712,7 @@ function renderTrips(){
         ${extraPhotos}
         ${links?`<div class="trip-links">${links}</div>`:""}
         <div class="trip-actions">
+          <button class="btn btn-sm btn-outline" onclick="downloadTrip(${tr.id})">⬇️ Download</button>
           <button class="btn btn-sm btn-ghost" onclick="deleteTrip(${tr.id})">🗑️ Delete</button>
         </div>
       </div>
@@ -792,9 +724,58 @@ function deleteTrip(id){
   S.trips=S.trips.filter(t=>t.id!==id);
   save(S);renderTrips();toast("Entry deleted.");
 }
+
+function downloadTrip(id){
+  const tr=S.trips.find(t=>t.id===id);if(!tr)return;
+  const photos=tr.photos&&tr.photos.length?tr.photos:[];
+  const links=tr.links&&tr.links.length?tr.links:[];
+  const coverBg=photos.length
+    ?`background-image:url('${photos[0]}');background-size:cover;background-position:center;`
+    :`background:linear-gradient(135deg,#ede8ff,#e8d8ff);`;
+  const photosHTML=photos.length>1
+    ?`<div class="sec">photos</div><div class="photos">${photos.slice(1).map(p=>`<img src="${p}"/>`).join('')}</div>`
+    :'';
+  const linksHTML=links.length
+    ?`<div class="sec">links &amp; references</div><div class="lnks">${links.map(l=>`<a href="${esc(l)}" target="_blank">${esc(l)}</a>`).join('')}</div>`
+    :'';
+  const noteHTML=tr.note?`<div class="sec">memories</div><div class="note">${esc(tr.note)}</div>`:'';
+  const html=`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/>
+  <title>${esc(tr.place)} — Travel Diary</title>
+  <style>
+    body{font-family:Georgia,serif;max-width:680px;margin:40px auto;padding:0 24px;color:#2d1b69;background:#faf7ff;}
+    .cover{width:100%;height:240px;border-radius:16px;margin-bottom:28px;display:flex;align-items:flex-end;${coverBg}}
+    .cover-inner{background:linear-gradient(to top,rgba(30,10,60,.65),transparent);width:100%;padding:20px 22px;border-radius:0 0 16px 16px;}
+    .place{font-size:2rem;color:#fff;font-weight:bold;margin:0;}
+    .dt{color:rgba(255,255,255,.78);font-size:.88rem;margin-top:2px;}
+    .note{font-size:.96rem;line-height:1.7;color:#3b2070;margin-bottom:24px;white-space:pre-wrap;}
+    .sec{font-size:.72rem;color:#9876c0;text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;font-family:sans-serif;margin-top:20px;}
+    .photos{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
+    .photos img{width:calc(33% - 7px);border-radius:10px;object-fit:cover;aspect-ratio:1;}
+    .lnks{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+    .lnks a{color:#7c3aed;font-size:.88rem;word-break:break-all;font-family:sans-serif;}
+    footer{margin-top:36px;font-size:.72rem;color:#9876c0;text-align:center;font-family:sans-serif;}
+  </style></head><body>
+  <div class="cover">
+    <div class="cover-inner">
+      <p class="place">${esc(tr.place)}</p>
+      <p class="dt">${fmtDateShort(tr.date)}</p>
+    </div>
+  </div>
+  ${noteHTML}${photosHTML}${linksHTML}
+  <footer>From My Travel Diary 🌍 — Prettu Cute Wins</footer>
+  </body></html>`;
+  const blob=new Blob([html],{type:"text/html"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=`${tr.place.replace(/[^a-z0-9]/gi,'-').toLowerCase()}-diary.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast(`${tr.place} diary downloaded! 📖`);
+}
+
 function closeTripModal(){document.getElementById("tripModalBg").classList.remove("open");}
 
-/* ═══ CONFIRM RESET ═══ */
 let _pendingAction=null;
 const CONFIRM_COPY={
   resetDaily:{title:"Reset today's tasks?",sub:"Today's checkmarks clear so you can redo them tomorrow. Notes and history stay safe.",btn:"Yes, reset today"},
@@ -826,7 +807,6 @@ function doConfirmedAction(){
   save(S);renderAll();
 }
 
-/* ═══ TOAST ═══ */
 function toast(msg,type=""){
   const z=document.getElementById("toastZone");
   const el=document.createElement("div");
@@ -835,7 +815,6 @@ function toast(msg,type=""){
   setTimeout(()=>{el.style.animation="tOut .3s forwards";setTimeout(()=>el.remove(),300);},2800);
 }
 
-/* ═══ TABS ═══ */
 document.querySelectorAll(".tab-btn").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
@@ -868,4 +847,3 @@ renderAll();
 </script>
 </body>
 </html>
-
