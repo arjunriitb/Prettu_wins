@@ -17,89 +17,36 @@
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-
-    /* ── TOPBAR ── */
-    .topbar{
-      position:fixed;top:0;left:0;right:0;z-index:100;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:16px 32px;
-      background:rgba(6,4,14,0.82);
-      backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
-    }
+    .topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(6,4,14,0.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
     .topbar-logo{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--text);}
     .topbar-pills{display:flex;gap:8px;align-items:center;}
-    .tpill{
-      font-size:.71rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
-      padding:5px 12px;border:1px solid var(--border2);color:var(--muted);background:transparent;white-space:nowrap;
-    }
+    .tpill{font-size:.71rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border:1px solid var(--border2);color:var(--muted);background:transparent;white-space:nowrap;}
     .tpill.purple{border-color:var(--purple-bright);color:var(--purple-bright);text-shadow:0 0 6px rgba(168,85,247,0.5);}
-
-    /* ── HERO ── */
-    .hero{
-      position:relative;width:100%;height:100vh;overflow:hidden;background:#06040e;
-    }
-    /* ─────────────────────────────────────────────
-       HERO IMAGE — to swap the cat photo:
-       1. Add your new photo to images/cats/
-       2. Change the src below to your new filename
-       e.g. src="images/cats/mycat.jpg"
-    ───────────────────────────────────────────── */
-    .hero-img{
-      width:100%;height:100%;
-      object-fit:cover;
-      object-position:center center; /* shows full cat on desktop */
-      filter:grayscale(100%) brightness(0.45) contrast(1.1);
-      transition:transform 10s ease;
-      display:block;
-    }
+    /* sync indicator */
+    .sync-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;margin-right:6px;box-shadow:0 0 6px #4ade80;}
+    .sync-dot.syncing{background:var(--accent);animation:pulse 1s infinite;}
+    .sync-dot.error{background:#f87171;box-shadow:0 0 6px #f87171;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero{position:relative;width:100%;height:100vh;overflow:hidden;background:#06040e;}
+    .hero-img{width:100%;height:100%;object-fit:cover;object-position:center center;filter:grayscale(100%) brightness(0.45) contrast(1.1);transition:transform 10s ease;display:block;}
     .hero:hover .hero-img{transform:scale(1.02);}
-    .hero-overlay{
-      position:absolute;inset:0;
-      background:
-        linear-gradient(to bottom,rgba(6,4,14,0.3) 0%,transparent 25%,transparent 50%,rgba(6,4,14,0.97) 100%),
-        radial-gradient(ellipse 80% 60% at 50% 100%,rgba(124,58,237,0.18) 0%,transparent 70%);
-      pointer-events:none;
-    }
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,4,14,0.3) 0%,transparent 25%,transparent 50%,rgba(6,4,14,0.97) 100%),radial-gradient(ellipse 80% 60% at 50% 100%,rgba(124,58,237,0.18) 0%,transparent 70%);pointer-events:none;}
     .hero-tint{position:absolute;inset:0;background:rgba(76,29,149,0.12);mix-blend-mode:color;pointer-events:none;}
     .hero-content{position:absolute;bottom:0;left:0;right:0;padding:0 48px 60px;}
     .hero-label{display:flex;align-items:center;gap:8px;margin-bottom:18px;}
-    .hero-label-dot{
-      width:6px;height:6px;border-radius:50%;
-      background:var(--purple-bright);
-      box-shadow:0 0 8px var(--purple-bright),0 0 16px rgba(168,85,247,0.5);
-      animation:dotpulse 2s ease-in-out infinite;
-    }
+    .hero-label-dot{width:6px;height:6px;border-radius:50%;background:var(--purple-bright);box-shadow:0 0 8px var(--purple-bright),0 0 16px rgba(168,85,247,0.5);animation:dotpulse 2s ease-in-out infinite;}
     @keyframes dotpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
     .hero-label-text{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;}
-    .hero-title{
-      font-family:'DM Serif Display',serif;
-      font-size:clamp(2.4rem,7vw,5.5rem);
-      color:var(--text);line-height:1.05;letter-spacing:-0.03em;
-    }
-    .hero-title .neon-text{
-      color:var(--purple-bright);
-      text-shadow:0 0 10px rgba(168,85,247,0.9),0 0 30px rgba(168,85,247,0.5),0 0 60px rgba(124,58,237,0.3);
-    }
+    .hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,7vw,5.5rem);color:var(--text);line-height:1.05;letter-spacing:-0.03em;}
+    .hero-title .neon-text{color:var(--purple-bright);text-shadow:0 0 10px rgba(168,85,247,0.9),0 0 30px rgba(168,85,247,0.5),0 0 60px rgba(124,58,237,0.3);}
     .hero-sub{font-size:.88rem;color:rgba(237,232,255,0.5);margin-top:10px;letter-spacing:.02em;max-width:360px;}
     .hero-stats-row{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap;}
     .hstat{border-left:1px solid var(--border2);padding-left:14px;}
     .hstat-num{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--text);line-height:1;}
     .hstat-lbl{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
-    .scroll-hint{
-      position:absolute;bottom:24px;right:32px;
-      font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--muted);display:flex;align-items:center;gap:8px;
-    }
-    .scroll-arrow{
-      width:18px;height:18px;
-      border-right:1px solid var(--muted);border-bottom:1px solid var(--muted);
-      transform:rotate(45deg);
-      animation:bounce 1.6s ease-in-out infinite;
-    }
+    .scroll-hint{position:absolute;bottom:24px;right:32px;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;}
+    .scroll-arrow{width:18px;height:18px;border-right:1px solid var(--muted);border-bottom:1px solid var(--muted);transform:rotate(45deg);animation:bounce 1.6s ease-in-out infinite;}
     @keyframes bounce{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(3px,3px)}}
-
-    /* ── MAIN ── */
     .page-wrap{max-width:860px;margin:0 auto;padding:0 24px 120px;}
     .intro-block{padding:40px 0 32px;border-bottom:1px solid var(--border);}
     .intro-cat{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:8px;}
@@ -108,100 +55,45 @@
     .intro-stats{display:flex;gap:28px;margin-top:22px;flex-wrap:wrap;}
     .istat-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--accent);line-height:1;text-shadow:0 0 20px rgba(167,139,250,0.25);}
     .istat-lbl{font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
-
-    /* ── TABS ── */
     .tabs-nav{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
     .tabs-nav::-webkit-scrollbar{display:none;}
-    .tab-btn{
-      padding:14px 20px;background:transparent;border:none;
-      border-bottom:2px solid transparent;color:var(--muted);
-      font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:500;
-      letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .18s;white-space:nowrap;margin-bottom:-1px;
-    }
+    .tab-btn{padding:14px 20px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .18s;white-space:nowrap;margin-bottom:-1px;}
     .tab-btn:hover{color:var(--text);}
     .tab-btn.active{color:var(--accent);border-bottom-color:var(--purple-bright);}
-
-    /* ── SECTIONS ── */
     .tab-sec{display:none;padding-top:32px;}
     .tab-sec.active{display:block;animation:fadeUp .25s ease;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .sec-label{
-      font-size:.67rem;letter-spacing:.13em;text-transform:uppercase;
-      color:var(--muted);font-weight:500;margin:28px 0 14px;
-      display:flex;align-items:center;gap:12px;
-    }
+    .sec-label{font-size:.67rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:28px 0 14px;display:flex;align-items:center;gap:12px;}
     .sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
-
-    /* ── PROGRESS ── */
     .progress-wrap{background:var(--surface);border:1px solid var(--border);padding:16px 18px;margin-bottom:6px;}
     .progress-meta{display:flex;justify-content:space-between;font-size:.71rem;color:var(--muted);letter-spacing:.04em;margin-bottom:10px;}
     .progress-track{background:var(--border2);height:2px;overflow:hidden;}
-    .progress-fill{
-      height:100%;
-      background:linear-gradient(90deg,var(--purple),var(--purple-bright),var(--neon));
-      width:0%;transition:width .55s cubic-bezier(.34,1.56,.64,1);
-      box-shadow:0 0 8px rgba(168,85,247,0.6);
-    }
-
-    /* ── TASK GRID ── */
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--purple-bright),var(--neon));width:0%;transition:width .55s cubic-bezier(.34,1.56,.64,1);box-shadow:0 0 8px rgba(168,85,247,0.6);}
     .task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--border);}
-    .task-card{
-      background:var(--surface);padding:22px 18px 18px;
-      cursor:pointer;position:relative;overflow:hidden;
-      transition:background .2s;user-select:none;-webkit-tap-highlight-color:transparent;
-    }
-    .task-card::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,var(--purple),var(--purple-bright));
-      transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
-      box-shadow:0 0 6px rgba(168,85,247,0.6);
-    }
+    .task-card{background:var(--surface);padding:22px 18px 18px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s;user-select:none;-webkit-tap-highlight-color:transparent;}
+    .task-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--purple),var(--purple-bright));transform:scaleX(0);transform-origin:left;transition:transform .3s ease;box-shadow:0 0 6px rgba(168,85,247,0.6);}
     .task-card:hover{background:var(--surface2);}
     .task-card:hover::before,.task-card.done::before{transform:scaleX(1);}
     .task-card.done{background:var(--surface2);}
-    .task-check{
-      position:absolute;top:14px;right:14px;width:20px;height:20px;
-      border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;
-      font-size:.6rem;color:transparent;transition:all .25s;
-    }
+    .task-check{position:absolute;top:14px;right:14px;width:20px;height:20px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:transparent;transition:all .25s;}
     .task-card.done .task-check{background:var(--purple);border-color:var(--purple-bright);color:#fff;box-shadow:0 0 8px rgba(168,85,247,0.5);}
     .task-icon{font-size:1.5rem;margin-bottom:10px;display:block;}
     .task-name{font-family:'DM Serif Display',serif;font-size:.98rem;color:var(--text);line-height:1.2;}
     .task-pts{font-size:.68rem;color:var(--accent);font-weight:500;letter-spacing:.06em;margin-top:5px;}
     .task-freq{font-size:.62rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;}
-    .task-note-snippet{
-      margin-top:8px;font-size:.70rem;color:var(--muted);font-style:italic;
-      line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-    }
+    .task-note-snippet{margin-top:8px;font-size:.70rem;color:var(--muted);font-style:italic;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
     .task-add-note{margin-top:8px;font-size:.68rem;color:var(--accent);font-weight:500;cursor:pointer;pointer-events:auto;letter-spacing:.04em;}
-
-    /* ── FORMS ── */
     .input-card{background:var(--surface);border:1px solid var(--border);padding:22px;}
     .input-card h3{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--text);margin-bottom:14px;}
     .input-row{display:flex;gap:8px;flex-wrap:wrap;}
-    input[type=text],input[type=date],input[type=url],select,textarea{
-      padding:10px 12px;border:1px solid var(--border2);
-      background:rgba(13,10,24,0.8);color:var(--text);
-      font-family:'DM Sans',sans-serif;font-size:.84rem;outline:none;transition:border-color .18s;
-    }
-    input[type=text]:focus,input[type=date]:focus,input[type=url]:focus,select:focus,textarea:focus{
-      border-color:var(--purple-bright);box-shadow:0 0 0 2px rgba(168,85,247,0.12);
-    }
+    input[type=text],input[type=date],input[type=url],select,textarea{padding:10px 12px;border:1px solid var(--border2);background:rgba(13,10,24,0.8);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.84rem;outline:none;transition:border-color .18s;}
+    input[type=text]:focus,input[type=date]:focus,input[type=url]:focus,select:focus,textarea:focus{border-color:var(--purple-bright);box-shadow:0 0 0 2px rgba(168,85,247,0.12);}
     input[type=text],input[type=url]{flex:1;min-width:140px;}
     select{min-width:130px;cursor:pointer;background:var(--surface);}
     select option{background:var(--surface);}
     textarea{width:100%;resize:vertical;min-height:72px;}
-    label.form-lbl{
-      font-size:.67rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
-      color:var(--muted);display:block;margin-bottom:5px;margin-top:12px;
-    }
-
-    /* ── BUTTONS ── */
-    .btn{
-      padding:10px 20px;border:1px solid var(--border2);background:transparent;
-      color:var(--text);font-family:'DM Sans',sans-serif;font-size:.78rem;
-      font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .18s;
-    }
+    label.form-lbl{font-size:.67rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px;margin-top:12px;}
+    .btn{padding:10px 20px;border:1px solid var(--border2);background:transparent;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .18s;}
     .btn:hover{border-color:var(--accent);color:var(--accent);}
     .btn-primary{background:var(--purple);border-color:var(--purple-bright);color:#fff;font-weight:600;box-shadow:0 0 12px rgba(124,58,237,0.35);}
     .btn-primary:hover{background:var(--purple-bright);border-color:var(--purple-bright);box-shadow:0 0 20px rgba(168,85,247,0.5);}
@@ -214,8 +106,6 @@
     .btn-sage{background:#1a2e1a;border-color:#2d4a2d;color:#86efac;}
     .btn-sm{padding:5px 11px;font-size:.68rem;}
     .btn-full{width:100%;margin-top:12px;}
-
-    /* ── REELS ── */
     .reel-list{display:flex;flex-direction:column;gap:1px;background:var(--border);}
     .reel-item{background:var(--surface);padding:14px 16px;display:flex;align-items:center;gap:12px;transition:background .18s;}
     .reel-item:hover{background:var(--surface2);}
@@ -226,29 +116,14 @@
     .badge-bf{border:1px solid var(--accent);color:var(--accent);}
     .badge-me{border:1px solid var(--border2);color:var(--muted);}
     .reel-actions{display:flex;gap:5px;flex-shrink:0;}
-
-    /* ── REWARDS ── */
     .rewards-note{background:var(--surface);border:1px solid var(--border);padding:20px 24px;}
     .rewards-note p{font-size:.88rem;color:var(--muted);}
     .rewards-note strong{color:var(--accent);text-shadow:0 0 8px rgba(167,139,250,0.3);}
     .cat-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--border);margin-top:2px;}
     .cat-card{background:var(--surface);overflow:hidden;position:relative;aspect-ratio:1;}
     .cat-card:hover .cat-img{filter:grayscale(100%) brightness(0.65) contrast(1.1);transform:scale(1.04);}
-    .cat-img{
-      width:100%;height:100%;object-fit:cover;
-      /* shows full cat face: center top ensures head is visible */
-      object-position:center 20%;
-      filter:grayscale(100%) brightness(0.5) contrast(1.1);
-      transition:transform .4s ease,filter .3s ease;display:block;
-    }
-    .cat-lbl{
-      position:absolute;bottom:0;left:0;right:0;
-      padding:24px 10px 8px;
-      background:linear-gradient(to top,rgba(6,4,14,.9),transparent);
-      font-family:'DM Serif Display',serif;font-style:italic;font-size:.72rem;color:rgba(167,139,250,0.6);
-    }
-
-    /* ── HISTORY ── */
+    .cat-img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:grayscale(100%) brightness(0.5) contrast(1.1);transition:transform .4s ease,filter .3s ease;display:block;}
+    .cat-lbl{position:absolute;bottom:0;left:0;right:0;padding:24px 10px 8px;background:linear-gradient(to top,rgba(6,4,14,.9),transparent);font-family:'DM Serif Display',serif;font-style:italic;font-size:.72rem;color:rgba(167,139,250,0.6);}
     .report-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1px;background:var(--border);margin-bottom:2px;}
     .stat-card{background:var(--surface);padding:18px 14px;text-align:center;}
     .stat-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--accent);line-height:1;text-shadow:0 0 16px rgba(167,139,250,0.2);}
@@ -259,15 +134,11 @@
     .date-field{display:flex;flex-direction:column;gap:4px;}
     .date-field label{font-size:.67rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);}
     .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
-    .filter-btn{
-      padding:5px 12px;border:1px solid var(--border2);background:transparent;
-      color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.68rem;
-      font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .18s;
-    }
+    .filter-btn{padding:5px 12px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .18s;}
     .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);}
     .day-block{margin-bottom:20px;}
     .day-heading{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
-    .day-pts-badge{font-size:.62rem;padding:2px 8px;border:1px solid var(--purple);color:var(--accent);font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:.06em;text-shadow:0 0 6px rgba(167,139,250,0.3);}
+    .day-pts-badge{font-size:.62rem;padding:2px 8px;border:1px solid var(--purple);color:var(--accent);font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:.06em;}
     .log-entry{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 14px;display:flex;gap:12px;align-items:flex-start;}
     .log-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
     .log-body{flex:1;}
@@ -275,8 +146,6 @@
     .log-time{font-size:.66rem;color:var(--muted2);margin-top:2px;letter-spacing:.04em;}
     .log-note{font-size:.76rem;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.5;border-left:1px solid var(--purple);padding-left:8px;}
     .log-pts{font-size:.68rem;color:var(--accent);font-weight:500;flex-shrink:0;letter-spacing:.04em;}
-
-    /* ── TRAVEL ── */
     .trip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);margin-top:2px;}
     .trip-card{background:var(--surface);overflow:hidden;transition:background .2s;}
     .trip-card:hover{background:var(--surface2);}
@@ -293,31 +162,19 @@
     .trip-actions{margin-top:14px;display:flex;gap:6px;}
     .trip-photos-row{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;margin-top:8px;}
     .trip-thumb{width:64px;height:64px;object-fit:cover;flex-shrink:0;filter:grayscale(100%) brightness(0.55);}
-
-    /* ── SETTINGS ── */
     .settings-card{background:var(--surface);border:1px solid var(--border);padding:22px;margin-bottom:1px;}
     .settings-card h3{font-family:'DM Serif Display',serif;font-size:.98rem;color:var(--text);margin-bottom:5px;}
     .settings-card p{font-size:.80rem;color:var(--muted);margin-bottom:14px;line-height:1.6;}
     .settings-row{display:flex;gap:8px;flex-wrap:wrap;}
     .info-box{background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.2);padding:14px 16px;font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
     .info-box strong{color:var(--accent);}
-
-    /* ── LINK LIST ── */
     .link-list{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
     .link-row{display:flex;gap:6px;align-items:center;}
     .link-row input{flex:1;}
     .link-row .btn-sm{flex-shrink:0;}
-
-    /* ── MODALS ── */
     .modal-bg{position:fixed;inset:0;background:rgba(6,4,14,0.85);backdrop-filter:blur(16px);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;}
     .modal-bg.open{display:flex;}
-    .modal{
-      background:var(--surface);border:1px solid var(--border2);
-      padding:32px 28px;max-width:420px;width:100%;text-align:center;
-      animation:popIn .3s cubic-bezier(.34,1.56,.64,1);
-      max-height:90vh;overflow-y:auto;
-      box-shadow:0 0 40px rgba(124,58,237,0.15);
-    }
+    .modal{background:var(--surface);border:1px solid var(--border2);padding:32px 28px;max-width:420px;width:100%;text-align:center;animation:popIn .3s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;box-shadow:0 0 40px rgba(124,58,237,0.15);}
     .modal.wide{max-width:560px;}
     @keyframes popIn{from{transform:scale(.88);opacity:0}to{transform:scale(1);opacity:1}}
     .modal-emoji{font-size:1.8rem;display:block;margin-bottom:8px;}
@@ -328,22 +185,17 @@
     .modal-text-left{text-align:left;}
     .modal-btn-row{display:flex;gap:8px;margin-top:16px;}
     .modal-btn-row .btn{flex:1;}
-
-    /* ── TOAST ── */
     .toast-zone{position:fixed;top:66px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:6px;pointer-events:none;}
-    .toast{
-      background:var(--surface2);border:1px solid var(--border2);
-      border-left:2px solid var(--purple-bright);
-      padding:10px 14px;font-size:.78rem;color:var(--text);
-      min-width:180px;max-width:260px;pointer-events:auto;
-      animation:tIn .25s ease;letter-spacing:.02em;
-      box-shadow:0 0 14px rgba(124,58,237,0.15);
-    }
+    .toast{background:var(--surface2);border:1px solid var(--border2);border-left:2px solid var(--purple-bright);padding:10px 14px;font-size:.78rem;color:var(--text);min-width:180px;max-width:260px;pointer-events:auto;animation:tIn .25s ease;letter-spacing:.02em;box-shadow:0 0 14px rgba(124,58,237,0.15);}
     .toast.err{border-left-color:#f87171;}
     @keyframes tIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
     @keyframes tOut{from{transform:translateX(0);opacity:1}to{transform:translateX(100%);opacity:0}}
     .empty{text-align:center;padding:40px 20px;color:var(--muted2);font-family:'DM Serif Display',serif;font-style:italic;font-size:.9rem;grid-column:1/-1;}
-
+    .loading-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+    .loading-screen.hidden{display:none;}
+    .loading-spinner{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--purple-bright);border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loading-text{font-family:'DM Serif Display',serif;font-size:.9rem;color:var(--muted);letter-spacing:.05em;}
     @media(max-width:560px){
       .topbar{padding:14px 18px;}
       .page-wrap{padding:0 16px 100px;}
@@ -354,32 +206,29 @@
       .date-range-row{flex-direction:column;}
       select{min-width:unset;}
       .topbar-pills{display:none;}
-      /* on mobile keep full image visible too */
       .hero-img{object-position:center center;}
     }
   </style>
 </head>
 <body>
 
+<!-- Loading screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading your wins…</div>
+</div>
+
 <div class="topbar">
   <div class="topbar-logo">Prettu's Cute Wins</div>
   <div class="topbar-pills">
     <div class="tpill purple">⭐ <span id="totalPts">0</span> pts</div>
     <div class="tpill">🐱 <span id="totalCats">0</span> cats</div>
+    <div class="tpill" id="syncStatus"><span class="sync-dot" id="syncDot"></span><span id="syncText">Live</span></div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════
-     HERO
-     ─ To change the cat photo:
-       1. Drop your new photo into images/cats/
-       2. Change the src on the <img> below
-     ════════════════════════════════════════════ -->
 <div class="hero">
-  <img class="hero-img" id="heroImg"
-    src="images/cats/cat2.jpg"
-    onerror="this.style.opacity='0'"
-    alt="hero cat"/>
+  <img class="hero-img" id="heroImg" src="images/cats/cat1.jpg" onerror="this.style.opacity='0'" alt="hero cat"/>
   <div class="hero-overlay"></div>
   <div class="hero-tint"></div>
   <div class="hero-content">
@@ -390,14 +239,8 @@
     <h1 class="hero-title">Prettu's <span class="neon-text">Cute</span><br>Wins ✨</h1>
     <p class="hero-sub">Complete tasks · Earn points · Unlock cat rewards 🐱</p>
     <div class="hero-stats-row">
-      <div class="hstat">
-        <div class="hstat-num" id="heroTotalPts">0</div>
-        <div class="hstat-lbl">Points</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num" id="heroCats">0</div>
-        <div class="hstat-lbl">Cat Rewards</div>
-      </div>
+      <div class="hstat"><div class="hstat-num" id="heroTotalPts">0</div><div class="hstat-lbl">Points</div></div>
+      <div class="hstat"><div class="hstat-num" id="heroCats">0</div><div class="hstat-lbl">Cat Rewards</div></div>
     </div>
   </div>
   <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
@@ -423,7 +266,6 @@
     <button class="tab-btn" data-tab="settings">Settings</button>
   </nav>
 
-  <!-- TASKS -->
   <section class="tab-sec active" id="tab-tasks">
     <div class="progress-wrap">
       <div class="progress-meta"><span>Next cat reward</span><span id="progText">0 / 50 pts</span></div>
@@ -435,7 +277,6 @@
     <div class="task-grid" id="weeklyGrid"></div>
   </section>
 
-  <!-- REELS -->
   <section class="tab-sec" id="tab-reels">
     <div class="input-card">
       <h3>Add a Reel Idea</h3>
@@ -452,23 +293,12 @@
     <div class="reel-list" id="reelList"></div>
   </section>
 
-  <!-- REWARDS -->
   <section class="tab-sec" id="tab-rewards">
-    <div class="rewards-note">
-      <p>Every <strong>50 points</strong> = 1 cat reward. Keep going.</p>
-    </div>
-    <div class="sec-label" style="margin-top:24px">
-      Cat Collection
-      <!-- ─────────────────────────────────────────
-           To add more cat reward photos:
-           1. Add photos to images/cats/
-           2. Update the CAT_IMAGES array in the script below
-      ───────────────────────────────────────── -->
-    </div>
+    <div class="rewards-note"><p>Every <strong>50 points</strong> = 1 cat reward. Keep going.</p></div>
+    <div class="sec-label" style="margin-top:24px">Cat Collection</div>
     <div class="cat-gallery" id="catGallery"></div>
   </section>
 
-  <!-- HISTORY -->
   <section class="tab-sec" id="tab-history">
     <div class="report-summary" id="reportSummary"></div>
     <div class="sec-label" style="margin-top:24px">Download Report</div>
@@ -485,7 +315,6 @@
     <div id="historyLog"></div>
   </section>
 
-  <!-- TRAVEL -->
   <section class="tab-sec" id="tab-travel">
     <div class="input-card">
       <h3>Add a Travel Entry</h3>
@@ -524,11 +353,8 @@
     <div class="trip-grid" id="tripGrid"></div>
   </section>
 
-  <!-- SETTINGS -->
   <section class="tab-sec" id="tab-settings">
-    <div class="info-box">
-      <strong>Tip:</strong> Reset daily tasks at end of each day — your history, notes and points are always saved.
-    </div>
+    <div class="info-box"><strong>Tip:</strong> Reset daily tasks at end of each day — your history, notes and points are always saved in the database.</div>
     <div class="settings-card">
       <h3>Reset Daily Tasks</h3>
       <p>Clears today's checkmarks. History, points and notes stay safe.</p>
@@ -547,7 +373,7 @@
   </section>
 </div>
 
-<!-- REWARD MODAL -->
+<!-- MODALS -->
 <div class="modal-bg" id="rewardModalBg">
   <div class="modal">
     <span class="modal-emoji">🎉</span>
@@ -557,8 +383,6 @@
     <button class="btn btn-primary btn-full" onclick="closeRewardModal()">Claim Reward</button>
   </div>
 </div>
-
-<!-- NOTE MODAL -->
 <div class="modal-bg" id="noteModalBg">
   <div class="modal">
     <span class="modal-emoji" id="noteModalEmoji">📝</span>
@@ -571,8 +395,6 @@
     </div>
   </div>
 </div>
-
-<!-- CONFIRM MODAL -->
 <div class="modal-bg" id="confirmModalBg">
   <div class="modal">
     <span class="modal-emoji">⚠️</span>
@@ -588,418 +410,584 @@
 <div class="toast-zone" id="toastZone"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-/* ════════════════════════════════════════════════
-   🐱 CAT IMAGES
-   ────────────────────────────────────────────────
-   HOW TO CHANGE / ADD CAT PHOTOS:
+/* ════════════════════════════════════
+   SUPABASE CONFIG — your keys are here
+   ════════════════════════════════════ */
+const SUPABASE_URL  = "https://dshazkvmqdaqhulrzwke.supabase.co"  // correct — no /rest/v1
+const SUPABASE_KEY  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaGF6a3ZtcWRhcWh1bHJ6d2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2OTY5NjQsImV4cCI6MjA5NTI3Mjk2NH0.AOdVggRqrvHQsNNOqipG3_1GCbjkhaA_25IKq-ryUxM"
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-   HERO photo (full-screen background):
-   → Change the <img src="images/cats/cat1.jpg"> in the HTML above.
-   → Use a wide landscape photo for best results (min 1200px wide).
-   → Tip: a photo with the cat centered works best on all screens.
-
-   REWARD gallery photos (shown when points are earned):
-   → Add your .jpg/.png files to the images/cats/ folder.
-   → List them in the array below. They cycle through as rewards.
-   ════════════════════════════════════════════════ */
+/* ════════════════════════════════════
+   CAT IMAGES — add your filenames here
+   ════════════════════════════════════ */
 const CAT_IMAGES = [
   "images/cats/cat1.jpg",
   "images/cats/cat2.jpg",
   "images/cats/cat3.jpg",
-  // Add more: "images/cats/cat4.jpg",
-];
+]
 
-/* ════════════════════════════════════════════════
+/* ════════════════════════════════════
    TASKS
-   ════════════════════════════════════════════════ */
-const TASKS=[
+   ════════════════════════════════════ */
+const TASKS = [
   {id:1,name:"Study Session",icon:"📚",freq:"daily",pts:20,notePlaceholder:"What did you study today?",noteLabel:"What I studied"},
   {id:2,name:"Reading",icon:"📖",freq:"daily",pts:15,notePlaceholder:"What did you read?",noteLabel:"What I read"},
-  {id:3,name:"Walk Outside",icon:"🚶‍♀️",freq:"daily",pts:15,notePlaceholder:"How long & where did you walk?",noteLabel:"Walk details"},
+  {id:3,name:"Walking",icon:"🚶‍♀️",freq:"daily",pts:15,notePlaceholder:"How long & where did you walk?",noteLabel:"Walk details"},
   {id:4,name:"Gym Workout",icon:"🏋️‍♀️",freq:"daily",pts:25,notePlaceholder:"What did you work on at the gym?",noteLabel:"Workout details"},
   {id:5,name:"Cook a Meal",icon:"🍚",freq:"daily",pts:20,notePlaceholder:"What did you cook?",noteLabel:"What I cooked"},
   {id:6,name:"Create a Reel",icon:"🎬",freq:"daily",pts:35,notePlaceholder:"What was the reel about?",noteLabel:"Reel topic"},
   {id:7,name:"Clean the Room",icon:"🧹",freq:"weekly",pts:30,notePlaceholder:"What did you clean / organise?",noteLabel:"What I cleaned"},
-];
-const PTS_PER_REWARD=50;
+]
+const PTS_PER_REWARD = 50
 
-/* ── PDF helpers ── */
-function pdfSafe(s){return String(s||"").replace(/[^\x00-\x7F]/g," ").replace(/\s+/g," ").trim();}
-function wrapText(doc,text,maxW){
-  const words=text.split(" "),lines=[];let line="";
-  for(const w of words){const t=line?line+" "+w:w;if(doc.getTextWidth(t)>maxW&&line){lines.push(line);line=w;}else line=t;}
-  if(line)lines.push(line);return lines;
+/* ════════════════════════════════════
+   STATE — loaded from Supabase
+   ════════════════════════════════════ */
+let S = {
+  completions: {},
+  notes: {},
+  log: [],
+  reels: [],
+  trips: [],
+  totalPts: 0,
+  catsEarned: 0,
+  nextReelId: 1,
+  nextTripId: 1,
 }
 
-/* ── State ── */
-function load(){try{const r=localStorage.getItem("pcw_v1");if(r)return JSON.parse(r);}catch(_){}return{completions:{},notes:{},log:[],reels:[],trips:[],totalPts:0,catsEarned:0,nextReelId:1,nextTripId:1};}
-function save(s){localStorage.setItem("pcw_v1",JSON.stringify(s));}
-let S=load();
-if(!S.log)S.log=[];if(!S.notes)S.notes={};if(!S.trips)S.trips=[];if(!S.nextTripId)S.nextTripId=1;
+/* ─── sync indicator ─── */
+function setSyncing(){ document.getElementById('syncDot').className='sync-dot syncing'; document.getElementById('syncText').textContent='Saving…' }
+function setSynced(){  document.getElementById('syncDot').className='sync-dot';         document.getElementById('syncText').textContent='Live' }
+function setSyncErr(){ document.getElementById('syncDot').className='sync-dot error';   document.getElementById('syncText').textContent='Offline' }
 
-/* ── Date helpers ── */
-function todayKey(){return new Date().toISOString().slice(0,10);}
-function weekKey(){const d=new Date(),j=new Date(d.getFullYear(),0,1);const w=Math.ceil(((d-j)/86400000+j.getDay()+1)/7);return `${d.getFullYear()}-W${w}`;}
-function compKey(t){return t.freq==="daily"?`${t.id}-${todayKey()}`:`${t.id}-${weekKey()}`;}
-function noteKey(t){return `note-${t.id}-${t.freq==="daily"?todayKey():weekKey()}`;}
-function fmtDate(iso){const d=new Date(iso+"T00:00:00");return d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
-function fmtDateShort(iso){const d=new Date(iso+"T00:00:00");return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});}
-function fmtTime(ts){return new Date(ts).toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});}
+/* ════════════════════════════════════
+   LOAD ALL DATA FROM SUPABASE
+   ════════════════════════════════════ */
+async function loadFromDB() {
+  try {
+    const [stateRes, compRes, notesRes, logRes, reelsRes, tripsRes] = await Promise.all([
+      sb.from('app_state').select('*').eq('id','singleton').single(),
+      sb.from('completions').select('*'),
+      sb.from('notes').select('*'),
+      sb.from('activity_log').select('*').order('ts', {ascending:true}),
+      sb.from('reels').select('*').order('id', {ascending:false}),
+      sb.from('trips').select('*').order('id', {ascending:false}),
+    ])
 
-/* ── Tasks ── */
+    if (stateRes.data) {
+      S.totalPts   = stateRes.data.total_pts   || 0
+      S.catsEarned = stateRes.data.cats_earned  || 0
+      S.nextReelId = stateRes.data.next_reel_id || 1
+      S.nextTripId = stateRes.data.next_trip_id || 1
+    }
+
+    S.completions = {}
+    if (compRes.data) compRes.data.forEach(r => S.completions[r.key] = true)
+
+    S.notes = {}
+    if (notesRes.data) notesRes.data.forEach(r => S.notes[r.key] = r.content)
+
+    S.log = logRes.data ? logRes.data.map(r => ({
+      ts: r.ts, date: r.date, taskId: r.task_id,
+      taskName: r.task_name, taskIcon: r.task_icon,
+      pts: r.pts, freq: r.freq, noteKey: r.note_key
+    })) : []
+
+    S.reels = reelsRes.data ? reelsRes.data.map(r => ({
+      id: r.id, idea: r.idea, by: r.added_by, used: r.used
+    })) : []
+
+    S.trips = tripsRes.data ? tripsRes.data.map(r => ({
+      id: r.id, place: r.place, date: r.date, note: r.note,
+      links: r.links || [], photos: r.photos || [], ts: new Date(r.created_at).getTime()
+    })) : []
+
+    setSynced()
+  } catch(e) {
+    setSyncErr()
+    console.error('Load error:', e)
+  }
+}
+
+/* ════════════════════════════════════
+   SAVE HELPERS — each writes to DB
+   ════════════════════════════════════ */
+async function saveState() {
+  setSyncing()
+  const { error } = await sb.from('app_state').upsert({
+    id: 'singleton',
+    total_pts:   S.totalPts,
+    cats_earned: S.catsEarned,
+    next_reel_id: S.nextReelId,
+    next_trip_id: S.nextTripId,
+    updated_at: new Date().toISOString()
+  })
+  error ? setSyncErr() : setSynced()
+}
+
+async function saveCompletion(key) {
+  setSyncing()
+  const { error } = await sb.from('completions').upsert({ key, completed_at: new Date().toISOString() })
+  error ? setSyncErr() : setSynced()
+}
+
+async function deleteCompletion(key) {
+  setSyncing()
+  const { error } = await sb.from('completions').delete().eq('key', key)
+  error ? setSyncErr() : setSynced()
+}
+
+async function saveNote(key, content) {
+  setSyncing()
+  if (content) {
+    const { error } = await sb.from('notes').upsert({ key, content, updated_at: new Date().toISOString() })
+    error ? setSyncErr() : setSynced()
+  } else {
+    const { error } = await sb.from('notes').delete().eq('key', key)
+    error ? setSyncErr() : setSynced()
+  }
+}
+
+async function saveLogEntry(entry) {
+  setSyncing()
+  const { error } = await sb.from('activity_log').insert({
+    ts: entry.ts, date: entry.date, task_id: entry.taskId,
+    task_name: entry.taskName, task_icon: entry.taskIcon,
+    pts: entry.pts, freq: entry.freq, note_key: entry.noteKey
+  })
+  error ? setSyncErr() : setSynced()
+}
+
+async function saveReel(reel) {
+  setSyncing()
+  const { error } = await sb.from('reels').upsert({
+    id: reel.id, idea: reel.idea, added_by: reel.by, used: reel.used
+  })
+  error ? setSyncErr() : setSynced()
+}
+
+async function deleteReelDB(id) {
+  setSyncing()
+  const { error } = await sb.from('reels').delete().eq('id', id)
+  error ? setSyncErr() : setSynced()
+}
+
+async function saveTrip(trip) {
+  setSyncing()
+  const { error } = await sb.from('trips').upsert({
+    id: trip.id, place: trip.place, date: trip.date,
+    note: trip.note, links: trip.links, photos: trip.photos
+  })
+  error ? setSyncErr() : setSynced()
+}
+
+async function deleteTripDB(id) {
+  setSyncing()
+  const { error } = await sb.from('trips').delete().eq('id', id)
+  error ? setSyncErr() : setSynced()
+}
+
+/* ════════════════════════════════════
+   DATE HELPERS
+   ════════════════════════════════════ */
+function todayKey(){ return new Date().toISOString().slice(0,10) }
+function weekKey(){ const d=new Date(),j=new Date(d.getFullYear(),0,1); const w=Math.ceil(((d-j)/86400000+j.getDay()+1)/7); return `${d.getFullYear()}-W${w}` }
+function compKey(t){ return t.freq==="daily" ? `${t.id}-${todayKey()}` : `${t.id}-${weekKey()}` }
+function nKey(t){ return `note-${t.id}-${t.freq==="daily"?todayKey():weekKey()}` }
+function fmtDate(iso){ const d=new Date(iso+"T00:00:00"); return d.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) }
+function fmtDateShort(iso){ const d=new Date(iso+"T00:00:00"); return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}) }
+function fmtTime(ts){ return new Date(ts).toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}) }
+
+/* ════════════════════════════════════
+   RENDER
+   ════════════════════════════════════ */
 function renderTasks(){
-  document.getElementById("dailyGrid").innerHTML=TASKS.filter(t=>t.freq==="daily").map(cardHTML).join("")||`<p class="empty">No daily tasks.</p>`;
-  document.getElementById("weeklyGrid").innerHTML=TASKS.filter(t=>t.freq==="weekly").map(cardHTML).join("")||`<p class="empty">No weekly tasks.</p>`;
+  document.getElementById("dailyGrid").innerHTML  = TASKS.filter(t=>t.freq==="daily").map(cardHTML).join("") || `<p class="empty">No daily tasks.</p>`
+  document.getElementById("weeklyGrid").innerHTML = TASKS.filter(t=>t.freq==="weekly").map(cardHTML).join("") || `<p class="empty">No weekly tasks.</p>`
 }
 function cardHTML(t){
-  const done=!!S.completions[compKey(t)];
-  const note=S.notes[noteKey(t)]||"";
-  let ns="";
+  const done = !!S.completions[compKey(t)]
+  const note = S.notes[nKey(t)] || ""
+  let ns = ""
   if(done){
-    ns=note
-      ?`<div class="task-note-snippet">${esc(note)}</div><div class="task-add-note" onclick="event.stopPropagation();openNoteModal(${t.id})">Edit note</div>`
-      :`<div class="task-add-note" onclick="event.stopPropagation();openNoteModal(${t.id})">+ Add note</div>`;
+    ns = note
+      ? `<div class="task-note-snippet">${esc(note)}</div><div class="task-add-note" onclick="event.stopPropagation();openNoteModal(${t.id})">Edit note</div>`
+      : `<div class="task-add-note" onclick="event.stopPropagation();openNoteModal(${t.id})">+ Add note</div>`
   }
   return `<div class="task-card ${done?"done":""}" onclick="toggleTask(${t.id})">
     <div class="task-check">✓</div>
     <span class="task-icon">${t.icon}</span>
     <div class="task-name">${t.name}</div>
     <div class="task-pts">+${t.pts} pts</div>
-    <div class="task-freq">${t.freq}</div>${ns}</div>`;
+    <div class="task-freq">${t.freq}</div>${ns}</div>`
 }
-function toggleTask(id){
-  const task=TASKS.find(t=>t.id===id);if(!task)return;
-  const key=compKey(task);
+
+async function toggleTask(id){
+  const task = TASKS.find(t=>t.id===id); if(!task) return
+  const key = compKey(task)
   if(S.completions[key]){
-    delete S.completions[key];S.totalPts=Math.max(0,S.totalPts-task.pts);
-    save(S);renderAll();toast(`${task.name} unchecked`);
+    delete S.completions[key]
+    S.totalPts = Math.max(0, S.totalPts - task.pts)
+    renderAll()
+    toast(`${task.name} unchecked`)
+    await Promise.all([deleteCompletion(key), saveState()])
   } else {
-    const oldCats=Math.floor(S.totalPts/PTS_PER_REWARD);
-    S.completions[key]=Date.now();S.totalPts+=task.pts;
-    const earned=Math.floor(S.totalPts/PTS_PER_REWARD)-oldCats;
-    S.log.push({ts:Date.now(),date:todayKey(),taskId:task.id,taskName:task.name,taskIcon:task.icon,pts:task.pts,freq:task.freq,noteKey:noteKey(task)});
-    if(earned>0)S.catsEarned+=earned;
-    save(S);renderAll();
-    if(earned>0)showRewardModal(task.pts); else toast(`+${task.pts} pts`);
-    setTimeout(()=>openNoteModal(id),earned>0?800:300);
+    const oldCats = Math.floor(S.totalPts / PTS_PER_REWARD)
+    S.completions[key] = true
+    S.totalPts += task.pts
+    const earned = Math.floor(S.totalPts / PTS_PER_REWARD) - oldCats
+    const entry = {ts:Date.now(), date:todayKey(), taskId:task.id, taskName:task.name, taskIcon:task.icon, pts:task.pts, freq:task.freq, noteKey:nKey(task)}
+    S.log.push(entry)
+    if(earned > 0) S.catsEarned += earned
+    renderAll()
+    if(earned > 0) showRewardModal(task.pts); else toast(`+${task.pts} pts`)
+    await Promise.all([saveCompletion(key), saveLogEntry(entry), saveState()])
+    setTimeout(() => openNoteModal(id), earned > 0 ? 800 : 300)
   }
 }
 
-/* ── Note modal ── */
-let _noteTaskId=null;
-function openNoteModal(id){
-  const t=TASKS.find(t=>t.id===id);if(!t)return;_noteTaskId=id;
-  document.getElementById("noteModalEmoji").textContent=t.icon;
-  document.getElementById("noteModalTitle").textContent=t.noteLabel;
-  document.getElementById("noteModalSub").textContent=t.notePlaceholder;
-  document.getElementById("noteModalInput").value=S.notes[noteKey(t)]||"";
-  document.getElementById("noteModalBg").classList.add("open");
-  setTimeout(()=>document.getElementById("noteModalInput").focus(),100);
+/* ─── Note modal ─── */
+let _noteTaskId = null
+window.openNoteModal = function(id){
+  const t = TASKS.find(t=>t.id===id); if(!t) return
+  _noteTaskId = id
+  document.getElementById("noteModalEmoji").textContent = t.icon
+  document.getElementById("noteModalTitle").textContent = t.noteLabel
+  document.getElementById("noteModalSub").textContent   = t.notePlaceholder
+  document.getElementById("noteModalInput").value       = S.notes[nKey(t)] || ""
+  document.getElementById("noteModalBg").classList.add("open")
+  setTimeout(() => document.getElementById("noteModalInput").focus(), 100)
 }
-function closeNoteModal(){document.getElementById("noteModalBg").classList.remove("open");_noteTaskId=null;}
-function saveNote(){
-  if(_noteTaskId===null)return;
-  const t=TASKS.find(t=>t.id===_noteTaskId);if(!t)return;
-  const val=document.getElementById("noteModalInput").value.trim();
-  const nk=noteKey(t);
-  if(val){S.notes[nk]=val;toast("Note saved");}else{delete S.notes[nk];}
-  save(S);closeNoteModal();renderTasks();
+window.closeNoteModal = function(){ document.getElementById("noteModalBg").classList.remove("open"); _noteTaskId = null }
+window.saveNote = async function(){
+  if(_noteTaskId === null) return
+  const t = TASKS.find(t=>t.id===_noteTaskId); if(!t) return
+  const val = document.getElementById("noteModalInput").value.trim()
+  const nk = nKey(t)
+  if(val){ S.notes[nk] = val; toast("Note saved") } else { delete S.notes[nk] }
+  closeNoteModal(); renderTasks()
+  await saveNote(nk, val)
 }
 
-/* ── Progress / pills ── */
+/* ─── Progress / pills ─── */
 function renderProgress(){
-  const cur=S.totalPts%PTS_PER_REWARD;
-  document.getElementById("progFill").style.width=(cur/PTS_PER_REWARD*100)+"%";
-  document.getElementById("progText").textContent=`${cur} / ${PTS_PER_REWARD} pts`;
+  const cur = S.totalPts % PTS_PER_REWARD
+  document.getElementById("progFill").style.width = (cur/PTS_PER_REWARD*100)+"%"
+  document.getElementById("progText").textContent = `${cur} / ${PTS_PER_REWARD} pts`
 }
 function renderPills(){
-  document.getElementById("totalPts").textContent=S.totalPts;
-  document.getElementById("totalCats").textContent=S.catsEarned;
-  document.getElementById("introTotalPts").textContent=S.totalPts;
-  document.getElementById("introCats").textContent=S.catsEarned;
-  document.getElementById("heroTotalPts").textContent=S.totalPts;
-  document.getElementById("heroCats").textContent=S.catsEarned;
+  const pts = S.totalPts, cats = S.catsEarned
+  ;["totalPts","introTotalPts","heroTotalPts"].forEach(id => document.getElementById(id).textContent = pts)
+  ;["totalCats","introCats","heroCats"].forEach(id => document.getElementById(id).textContent = cats)
 }
 
-/* ── Reels ── */
+/* ─── Reels ─── */
 function renderReels(){
-  const el=document.getElementById("reelList");
-  if(!S.reels.length){el.innerHTML=`<p class="empty">No ideas yet.</p>`;return;}
-  el.innerHTML=S.reels.map(r=>`
+  const el = document.getElementById("reelList")
+  if(!S.reels.length){ el.innerHTML = `<p class="empty">No ideas yet.</p>`; return }
+  el.innerHTML = S.reels.map(r=>`
     <div class="reel-item ${r.used?"used":""}">
-      <span style="font-size:1rem;filter:grayscale(1)">${r.used?"✅":"🎬"}</span>
+      <span style="font-size:1rem">${r.used?"✅":"🎬"}</span>
       <span class="reel-text ${r.used?"struck":""}">${esc(r.idea)}</span>
       <span class="badge ${r.by==="boyfriend"?"badge-bf":"badge-me"}">${r.by==="boyfriend"?"From Cuttu":"My Idea"}</span>
       <div class="reel-actions">
         ${!r.used?`<button class="btn btn-sm btn-sage" onclick="markUsed(${r.id})">Done</button>`:""}
         <button class="btn btn-sm btn-ghost" onclick="deleteReel(${r.id})">✕</button>
       </div>
-    </div>`).join("");
+    </div>`).join("")
 }
-function addReel(){
-  const val=document.getElementById("reelInput").value.trim();
-  if(!val){toast("Type an idea first","err");return;}
-  S.reels.unshift({id:S.nextReelId++,idea:val,by:document.getElementById("reelBy").value,used:false,ts:Date.now()});
-  document.getElementById("reelInput").value="";save(S);renderReels();toast("Idea added");
+window.addReel = async function(){
+  const val = document.getElementById("reelInput").value.trim()
+  if(!val){ toast("Type an idea first","err"); return }
+  const reel = {id: S.nextReelId++, idea: val, by: document.getElementById("reelBy").value, used: false}
+  S.reels.unshift(reel)
+  document.getElementById("reelInput").value = ""
+  renderReels(); toast("Idea added")
+  await Promise.all([saveReel(reel), saveState()])
 }
-function markUsed(id){const r=S.reels.find(r=>r.id===id);if(r){r.used=true;save(S);renderReels();toast("Marked as done");}}
-function deleteReel(id){S.reels=S.reels.filter(r=>r.id!==id);save(S);renderReels();}
+window.markUsed = async function(id){
+  const r = S.reels.find(r=>r.id===id)
+  if(r){ r.used = true; renderReels(); toast("Marked as done"); await saveReel(r) }
+}
+window.deleteReel = async function(id){
+  S.reels = S.reels.filter(r=>r.id!==id)
+  renderReels()
+  await deleteReelDB(id)
+}
 
-/* ── Cat gallery ── */
+/* ─── Rewards ─── */
 function renderRewards(){
-  const el=document.getElementById("catGallery");
-  if(!S.catsEarned){el.innerHTML=`<p class="empty">Complete tasks to earn cat rewards.</p>`;return;}
-  let h="";
-  for(let i=0;i<S.catsEarned;i++){
-    const src=CAT_IMAGES[i%CAT_IMAGES.length];
-    h+=`<div class="cat-card"><img class="cat-img" src="${src}" onerror="this.style.display='none'" alt="cat reward"/><div class="cat-lbl">Reward #${i+1}</div></div>`;
+  const el = document.getElementById("catGallery")
+  if(!S.catsEarned){ el.innerHTML = `<p class="empty">Complete tasks to earn cat rewards.</p>`; return }
+  let h = ""
+  for(let i=0; i<S.catsEarned; i++){
+    const src = CAT_IMAGES[i % CAT_IMAGES.length]
+    h += `<div class="cat-card"><img class="cat-img" src="${src}" onerror="this.style.display='none'" alt="cat reward"/><div class="cat-lbl">Reward #${i+1}</div></div>`
   }
-  el.innerHTML=h;
+  el.innerHTML = h
 }
 function showRewardModal(pts){
-  const src=CAT_IMAGES[Math.floor(Math.random()*CAT_IMAGES.length)];
-  document.getElementById("modalMsg").textContent=`+${pts} pts earned. You're on a roll.`;
-  document.getElementById("modalImg").src=src;
-  document.getElementById("rewardModalBg").classList.add("open");
+  const src = CAT_IMAGES[Math.floor(Math.random()*CAT_IMAGES.length)]
+  document.getElementById("modalMsg").textContent = `+${pts} pts earned. You're on a roll.`
+  document.getElementById("modalImg").src = src
+  document.getElementById("rewardModalBg").classList.add("open")
 }
-function closeRewardModal(){document.getElementById("rewardModalBg").classList.remove("open");}
+window.closeRewardModal = function(){ document.getElementById("rewardModalBg").classList.remove("open") }
 
-/* ── History ── */
-let _activeFilter="all";
-function renderHistory(){renderReportSummary();renderFilterRow();renderLogEntries();}
+/* ─── History ─── */
+let _activeFilter = "all"
+function renderHistory(){ renderReportSummary(); renderFilterRow(); renderLogEntries() }
 function calcStreak(){
-  const days=[...new Set(S.log.map(e=>e.date))].sort().reverse();
-  if(!days.length)return 0;let s=0,check=new Date(todayKey()+"T00:00:00");
-  for(let d of days){const dd=new Date(d+"T00:00:00"),diff=Math.round((check-dd)/86400000);if(diff<=1){s++;check=dd;}else break;}
-  return s;
+  const days = [...new Set(S.log.map(e=>e.date))].sort().reverse()
+  if(!days.length) return 0
+  let s=0, check=new Date(todayKey()+"T00:00:00")
+  for(let d of days){ const dd=new Date(d+"T00:00:00"),diff=Math.round((check-dd)/86400000); if(diff<=1){s++;check=dd}else break }
+  return s
 }
 function renderReportSummary(){
-  const log=S.log,uniqueDays=new Set(log.map(e=>e.date)).size;
-  const tc={};log.forEach(e=>{tc[e.taskName]=(tc[e.taskName]||0)+1;});
-  const top=Object.entries(tc).sort((a,b)=>b[1]-a[1])[0];
+  const log=S.log, uniqueDays=new Set(log.map(e=>e.date)).size
+  const tc={}; log.forEach(e=>{ tc[e.taskName]=(tc[e.taskName]||0)+1 })
+  const top = Object.entries(tc).sort((a,b)=>b[1]-a[1])[0]
   document.getElementById("reportSummary").innerHTML=`
     <div class="stat-card"><div class="stat-num">${S.totalPts}</div><div class="stat-lbl">Total Points</div></div>
     <div class="stat-card"><div class="stat-num">${log.length}</div><div class="stat-lbl">Tasks Done</div></div>
     <div class="stat-card"><div class="stat-num">${uniqueDays}</div><div class="stat-lbl">Active Days</div></div>
     <div class="stat-card"><div class="stat-num">${calcStreak()}</div><div class="stat-lbl">Day Streak</div></div>
     <div class="stat-card"><div class="stat-num">${S.catsEarned}</div><div class="stat-lbl">Cat Rewards</div></div>
-    <div class="stat-card"><div class="stat-num">${top?top[1]:0}</div><div class="stat-lbl">${top?"Top: "+top[0]:"Top Task"}</div></div>`;
+    <div class="stat-card"><div class="stat-num">${top?top[1]:0}</div><div class="stat-lbl">${top?"Top: "+top[0]:"Top Task"}</div></div>`
 }
 function renderFilterRow(){
-  const names=["all",...new Set(S.log.map(e=>e.taskName))];
-  const icons={};TASKS.forEach(t=>{icons[t.name]=t.icon;});
-  document.getElementById("filterRow").innerHTML=names.map(n=>
+  const names = ["all",...new Set(S.log.map(e=>e.taskName))]
+  const icons = {}; TASKS.forEach(t=>{ icons[t.name]=t.icon })
+  document.getElementById("filterRow").innerHTML = names.map(n=>
     `<button class="filter-btn ${_activeFilter===n?"active":""}" onclick="setFilter('${n}')">${n==="all"?"All":n}</button>`
-  ).join("");
+  ).join("")
 }
-function setFilter(n){_activeFilter=n;renderFilterRow();renderLogEntries();}
+window.setFilter = function(n){ _activeFilter=n; renderFilterRow(); renderLogEntries() }
 function renderLogEntries(){
-  const el=document.getElementById("historyLog");
-  let entries=S.log.slice().reverse();
-  if(_activeFilter!=="all")entries=entries.filter(e=>e.taskName===_activeFilter);
-  if(!entries.length){el.innerHTML=`<p class="empty">No history yet.</p>`;return;}
-  const byDate={};entries.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
-  let h="";
+  const el = document.getElementById("historyLog")
+  let entries = S.log.slice().reverse()
+  if(_activeFilter !== "all") entries = entries.filter(e=>e.taskName===_activeFilter)
+  if(!entries.length){ el.innerHTML=`<p class="empty">No history yet.</p>`; return }
+  const byDate={}; entries.forEach(e=>{ if(!byDate[e.date]) byDate[e.date]=[]; byDate[e.date].push(e) })
+  let h=""
   for(const date of Object.keys(byDate).sort().reverse()){
-    const de=byDate[date],dp=de.reduce((s,e)=>s+e.pts,0);
-    h+=`<div class="day-block"><div class="day-heading">${date===todayKey()?"Today":fmtDate(date)}<span class="day-pts-badge">+${dp} pts</span></div>`;
-    de.forEach(e=>{const note=S.notes[e.noteKey]||"";
-      h+=`<div class="log-entry"><span class="log-icon">${e.taskIcon}</span><div class="log-body"><div class="log-task">${esc(e.taskName)}</div><div class="log-time">${fmtTime(e.ts)}</div>${note?`<div class="log-note">${esc(note)}</div>`:""}</div><div class="log-pts">+${e.pts}</div></div>`;
-    });h+="</div>";
+    const de=byDate[date], dp=de.reduce((s,e)=>s+e.pts,0)
+    h+=`<div class="day-block"><div class="day-heading">${date===todayKey()?"Today":fmtDate(date)}<span class="day-pts-badge">+${dp} pts</span></div>`
+    de.forEach(e=>{ const note=S.notes[e.noteKey]||""
+      h+=`<div class="log-entry"><span class="log-icon">${e.taskIcon}</span><div class="log-body"><div class="log-task">${esc(e.taskName)}</div><div class="log-time">${fmtTime(e.ts)}</div>${note?`<div class="log-note">${esc(note)}</div>`:""}</div><div class="log-pts">+${e.pts}</div></div>`
+    }); h+="</div>"
   }
-  el.innerHTML=h;
+  el.innerHTML=h
 }
 
-/* ── PDF export ── */
-function exportReport(){
-  const from=document.getElementById("exportFrom").value,to=document.getElementById("exportTo").value;
-  if(!from||!to){toast("Pick a date range","err");return;}
-  if(from>to){toast("From must be before To","err");return;}
-  const entries=S.log.filter(e=>e.date>=from&&e.date<=to);
-  if(!entries.length){toast("No entries in that range","err");return;}
-  const{jsPDF}=window.jspdf;
-  const doc=new jsPDF({unit:"pt",format:"a4"});
-  const PW=595,PH=842,ML=48,MR=48,CW=595-96;
-  let y=48;
-  function newPage(n){if(y+n>PH-40){doc.addPage();y=48;}}
-  doc.setFillColor(10,10,10);doc.rect(0,0,PW,80,"F");
-  doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(232,232,232);
-  doc.text("Achievement Report",ML,50);
-  doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(120,120,120);
-  doc.text(`${pdfSafe(fmtDateShort(from))}  —  ${pdfSafe(fmtDateShort(to))}`,ML,66);
-  y=80+28;
-  const byDate={};entries.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
-  const totalPts=entries.reduce((s,e)=>s+e.pts,0),uniqueDays=Object.keys(byDate).length;
-  const tc={};entries.forEach(e=>{tc[e.taskName]=(tc[e.taskName]||0)+1;});
-  const stats=[["Points",String(totalPts)],["Tasks",String(entries.length)],["Days",String(uniqueDays)]];
-  const sw=(CW-stats.length*12)/stats.length;
+/* ─── PDF export ─── */
+function pdfSafe(s){ return String(s||"").replace(/[^\x00-\x7F]/g," ").replace(/\s+/g," ").trim() }
+function wrapText(doc,text,maxW){ const words=text.split(" "),lines=[];let line=""; for(const w of words){const t=line?line+" "+w:w;if(doc.getTextWidth(t)>maxW&&line){lines.push(line);line=w}else line=t} if(line)lines.push(line);return lines }
+
+window.exportReport = function(){
+  const from=document.getElementById("exportFrom").value, to=document.getElementById("exportTo").value
+  if(!from||!to){ toast("Pick a date range","err"); return }
+  if(from>to){ toast("From must be before To","err"); return }
+  const entries=S.log.filter(e=>e.date>=from&&e.date<=to)
+  if(!entries.length){ toast("No entries in that range","err"); return }
+  const{jsPDF}=window.jspdf; const doc=new jsPDF({unit:"pt",format:"a4"})
+  const PW=595,PH=842,ML=48,MR=48,CW=595-96; let y=48
+  function newPage(n){if(y+n>PH-40){doc.addPage();y=48}}
+  doc.setFillColor(10,10,10);doc.rect(0,0,PW,80,"F")
+  doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(232,232,232)
+  doc.text("Achievement Report",ML,50)
+  doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(120,120,120)
+  doc.text(`${pdfSafe(fmtDateShort(from))}  —  ${pdfSafe(fmtDateShort(to))}`,ML,66)
+  y=80+28
+  const byDate={}; entries.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e)})
+  const totalPts=entries.reduce((s,e)=>s+e.pts,0), uniqueDays=Object.keys(byDate).length
+  const tc={}; entries.forEach(e=>{tc[e.taskName]=(tc[e.taskName]||0)+1})
+  const stats=[["Points",String(totalPts)],["Tasks",String(entries.length)],["Days",String(uniqueDays)]]
+  const sw=(CW-stats.length*12)/stats.length
   stats.forEach(([lbl,val],i)=>{
-    const sx=ML+i*(sw+12);
-    doc.setFillColor(20,20,20);doc.rect(sx,y,sw,50,"F");
-    doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(201,169,110);
-    doc.text(val,sx+sw/2,y+28,{align:"center"});
-    doc.setFont("helvetica","normal");doc.setFontSize(7);doc.setTextColor(100,100,100);
-    doc.text(lbl.toUpperCase(),sx+sw/2,y+42,{align:"center"});
-  });
-  y+=50+24;
+    const sx=ML+i*(sw+12)
+    doc.setFillColor(20,20,20);doc.rect(sx,y,sw,50,"F")
+    doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor(201,169,110)
+    doc.text(val,sx+sw/2,y+28,{align:"center"})
+    doc.setFont("helvetica","normal");doc.setFontSize(7);doc.setTextColor(100,100,100)
+    doc.text(lbl.toUpperCase(),sx+sw/2,y+42,{align:"center"})
+  })
+  y+=50+24
   for(const date of Object.keys(byDate).sort().reverse()){
-    const de=byDate[date],dp=de.reduce((s,e)=>s+e.pts,0);
-    newPage(30);
-    doc.setFillColor(18,18,18);doc.rect(ML,y,CW,20,"F");
-    doc.setFont("helvetica","bold");doc.setFontSize(9);doc.setTextColor(201,169,110);
-    doc.text(pdfSafe(fmtDate(date)),ML+8,y+13);
-    doc.text(`+${dp} pts`,PW-MR-8,y+13,{align:"right"});
-    y+=20+4;
+    const de=byDate[date],dp=de.reduce((s,e)=>s+e.pts,0)
+    newPage(30)
+    doc.setFillColor(18,18,18);doc.rect(ML,y,CW,20,"F")
+    doc.setFont("helvetica","bold");doc.setFontSize(9);doc.setTextColor(201,169,110)
+    doc.text(pdfSafe(fmtDate(date)),ML+8,y+13)
+    doc.text(`+${dp} pts`,PW-MR-8,y+13,{align:"right"})
+    y+=20+4
     de.forEach(e=>{
-      const note=S.notes[e.noteKey]||"";
-      const noteLines=note?wrapText(doc,pdfSafe(note),CW-30):[];
-      const rh=14+8+(noteLines.length?(noteLines.length*10+8):0)+6;
-      newPage(rh);
-      doc.setFillColor(15,15,15);doc.rect(ML,y,CW,rh-2,"F");
-      doc.setFont("helvetica","bold");doc.setFontSize(9.5);doc.setTextColor(232,232,232);
-      doc.text(pdfSafe(e.taskName),ML+8,y+13);
-      doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.setTextColor(80,80,80);
-      doc.text(pdfSafe(fmtTime(e.ts)),ML+8,y+23);
-      doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(201,169,110);
-      doc.text(`+${e.pts} pts`,PW-MR-8,y+13,{align:"right"});
+      const note=S.notes[e.noteKey]||"", noteLines=note?wrapText(doc,pdfSafe(note),CW-30):[]
+      const rh=14+8+(noteLines.length?(noteLines.length*10+8):0)+6
+      newPage(rh)
+      doc.setFillColor(15,15,15);doc.rect(ML,y,CW,rh-2,"F")
+      doc.setFont("helvetica","bold");doc.setFontSize(9.5);doc.setTextColor(232,232,232)
+      doc.text(pdfSafe(e.taskName),ML+8,y+13)
+      doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.setTextColor(80,80,80)
+      doc.text(pdfSafe(fmtTime(e.ts)),ML+8,y+23)
+      doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(201,169,110)
+      doc.text(`+${e.pts} pts`,PW-MR-8,y+13,{align:"right"})
       if(noteLines.length){
-        const ny=y+28;
-        doc.setDrawColor(201,169,110);doc.setLineWidth(1);doc.line(ML+8,ny,ML+8,ny+noteLines.length*10+2);
-        doc.setFont("helvetica","italic");doc.setFontSize(8);doc.setTextColor(100,100,100);
-        noteLines.forEach((l,li)=>doc.text(l,ML+14,ny+8+li*10));
+        const ny=y+28
+        doc.setDrawColor(201,169,110);doc.setLineWidth(1);doc.line(ML+8,ny,ML+8,ny+noteLines.length*10+2)
+        doc.setFont("helvetica","italic");doc.setFontSize(8);doc.setTextColor(100,100,100)
+        noteLines.forEach((l,li)=>doc.text(l,ML+14,ny+8+li*10))
       }
-      y+=rh+2;
-    });
-    y+=6;
+      y+=rh+2
+    }); y+=6
   }
-  doc.setFontSize(7);doc.setFont("helvetica","normal");doc.setTextColor(60,60,60);
-  doc.text(`Prettu's Cute Wins  |  ${new Date().toLocaleDateString("en-IN")}`,PW/2,PH-18,{align:"center"});
-  doc.save(`wins-${from}-to-${to}.pdf`);
-  toast("PDF downloaded");
+  doc.setFontSize(7);doc.setFont("helvetica","normal");doc.setTextColor(60,60,60)
+  doc.text(`Prettu's Cute Wins  |  ${new Date().toLocaleDateString("en-IN")}`,PW/2,PH-18,{align:"center"})
+  doc.save(`wins-${from}-to-${to}.pdf`)
+  toast("PDF downloaded")
 }
 
-/* ── Travel ── */
-function addLinkField(){
-  const list=document.getElementById("tripLinkList");
-  const row=document.createElement("div");row.className="link-row";
-  row.innerHTML=`<input type="url" placeholder="https://…" class="trip-link-input"/><button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">✕</button>`;
-  list.appendChild(row);
+/* ─── Travel ─── */
+window.addLinkField = function(){
+  const list=document.getElementById("tripLinkList")
+  const row=document.createElement("div"); row.className="link-row"
+  row.innerHTML=`<input type="url" placeholder="https://…" class="trip-link-input"/><button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">✕</button>`
+  list.appendChild(row)
 }
-function addTrip(){
-  const place=document.getElementById("tripPlace").value.trim(),date=document.getElementById("tripDate").value,note=document.getElementById("tripNote").value.trim();
-  if(!place){toast("Enter a place name","err");return;}if(!date){toast("Pick a date","err");return;}
-  const links=[...document.querySelectorAll(".trip-link-input")].map(i=>i.value.trim()).filter(Boolean);
-  const files=[...document.getElementById("tripPhotos").files];
-  const trip={id:S.nextTripId++,place,date,note,links,photos:[],ts:Date.now()};
-  if(files.length){
-    let loaded=0;
-    files.forEach(f=>{const r=new FileReader();r.onload=e=>{trip.photos.push(e.target.result);loaded++;if(loaded===files.length){S.trips.unshift(trip);save(S);renderTrips();toast(`${place} saved`);resetTripForm();}};r.readAsDataURL(f);});
-  } else {S.trips.unshift(trip);save(S);renderTrips();toast(`${place} saved`);resetTripForm();}
+window.addTrip = async function(){
+  const place=document.getElementById("tripPlace").value.trim(), date=document.getElementById("tripDate").value, note=document.getElementById("tripNote").value.trim()
+  if(!place){ toast("Enter a place name","err"); return }
+  if(!date){ toast("Pick a date","err"); return }
+  const links=[...document.querySelectorAll(".trip-link-input")].map(i=>i.value.trim()).filter(Boolean)
+  const files=[...document.getElementById("tripPhotos").files]
+  const trip={id:S.nextTripId++, place, date, note, links, photos:[], ts:Date.now()}
+  const readAll = files.map(f=>new Promise(res=>{ const r=new FileReader(); r.onload=e=>res(e.target.result); r.readAsDataURL(f) }))
+  trip.photos = await Promise.all(readAll)
+  S.trips.unshift(trip)
+  renderTrips(); toast(`${place} saved`); resetTripForm()
+  await Promise.all([saveTrip(trip), saveState()])
 }
 function resetTripForm(){
-  document.getElementById("tripPlace").value="";document.getElementById("tripDate").value="";
-  document.getElementById("tripNote").value="";document.getElementById("tripPhotos").value="";
-  document.getElementById("tripLinkList").innerHTML=`<div class="link-row"><input type="url" placeholder="https://…" class="trip-link-input"/><button class="btn btn-sm btn-ghost" onclick="addLinkField()">+ Add</button></div>`;
+  document.getElementById("tripPlace").value=""
+  document.getElementById("tripDate").value=""
+  document.getElementById("tripNote").value=""
+  document.getElementById("tripPhotos").value=""
+  document.getElementById("tripLinkList").innerHTML=`<div class="link-row"><input type="url" placeholder="https://…" class="trip-link-input"/><button class="btn btn-sm btn-ghost" onclick="addLinkField()">+ Add</button></div>`
 }
 function renderTrips(){
-  const el=document.getElementById("tripGrid");
-  if(!S.trips.length){el.innerHTML=`<p class="empty">No travels yet.</p>`;return;}
+  const el=document.getElementById("tripGrid")
+  if(!S.trips.length){ el.innerHTML=`<p class="empty">No travels yet.</p>`; return }
   el.innerHTML=S.trips.map(tr=>{
-    const cover=tr.photos&&tr.photos.length?`<img class="trip-img-strip" src="${tr.photos[0]}" onerror="this.style.display='none'"/>`:`<div class="trip-img-placeholder">🗺</div>`;
-    const extras=tr.photos&&tr.photos.length>1?`<div class="trip-photos-row">${tr.photos.slice(1).map(p=>`<img class="trip-thumb" src="${p}"/>`).join("")}</div>`:"";
-    const links=tr.links&&tr.links.length?tr.links.map(l=>`<a class="trip-link" href="${esc(l)}" target="_blank" rel="noopener">${esc(l)}</a>`).join(""):"";
-    return `<div class="trip-card">${cover}<div class="trip-body"><div class="trip-place">${esc(tr.place)}</div><div class="trip-date-lbl">${fmtDateShort(tr.date)}</div>${tr.note?`<div class="trip-note">${esc(tr.note)}</div>`:""}${extras}${links?`<div class="trip-links">${links}</div>`:""}<div class="trip-actions"><button class="btn btn-sm btn-outline" onclick="downloadTrip(${tr.id})">Download PDF</button><button class="btn btn-sm btn-ghost" onclick="deleteTrip(${tr.id})">Delete</button></div></div></div>`;
-  }).join("");
+    const cover=tr.photos&&tr.photos.length?`<img class="trip-img-strip" src="${tr.photos[0]}" onerror="this.style.display='none'"/>`:`<div class="trip-img-placeholder">🗺</div>`
+    const extras=tr.photos&&tr.photos.length>1?`<div class="trip-photos-row">${tr.photos.slice(1).map(p=>`<img class="trip-thumb" src="${p}"/>`).join("")}</div>`:""
+    const links=tr.links&&tr.links.length?tr.links.map(l=>`<a class="trip-link" href="${esc(l)}" target="_blank" rel="noopener">${esc(l)}</a>`).join(""):""
+    return `<div class="trip-card">${cover}<div class="trip-body"><div class="trip-place">${esc(tr.place)}</div><div class="trip-date-lbl">${fmtDateShort(tr.date)}</div>${tr.note?`<div class="trip-note">${esc(tr.note)}</div>`:""}${extras}${links?`<div class="trip-links">${links}</div>`:""}<div class="trip-actions"><button class="btn btn-sm btn-outline" onclick="downloadTrip(${tr.id})">Download PDF</button><button class="btn btn-sm btn-ghost" onclick="deleteTripUI(${tr.id})">Delete</button></div></div></div>`
+  }).join("")
 }
-function deleteTrip(id){S.trips=S.trips.filter(t=>t.id!==id);save(S);renderTrips();toast("Entry deleted");}
-function downloadTrip(id){
-  const tr=S.trips.find(t=>t.id===id);if(!tr)return;
-  const{jsPDF}=window.jspdf;const doc=new jsPDF({unit:"pt",format:"a4"});
-  const PW=595,PH=842,ML=48,MR=48,CW=595-96;let y=48;
-  function newPage(n){if(y+n>PH-40){doc.addPage();y=48;}}
-  doc.setFillColor(10,10,10);doc.rect(0,0,PW,90,"F");
-  if(tr.photos&&tr.photos.length){try{doc.addImage(tr.photos[0],"JPEG",0,0,PW,90);}catch(e){}}
-  doc.setFillColor(0,0,0);
-  try{doc.setGState(new doc.GState({opacity:.55}));doc.rect(0,0,PW,90,"F");doc.setGState(new doc.GState({opacity:1}));}catch(e){}
-  doc.setFont("helvetica","bold");doc.setFontSize(24);doc.setTextColor(232,232,232);doc.text(pdfSafe(tr.place),ML,52);
-  doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(201,169,110);doc.text(pdfSafe(fmtDateShort(tr.date)).toUpperCase(),ML,70);
-  y=90+28;
-  if(tr.note){
-    doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(80,80,80);doc.text("MEMORIES",ML,y);y+=12;
-    const nl=wrapText(doc,pdfSafe(tr.note),CW-16);const bh=nl.length*13+16;
-    doc.setFillColor(16,16,16);doc.rect(ML,y,CW,bh,"F");
-    doc.setDrawColor(201,169,110);doc.setLineWidth(1.5);doc.line(ML,y,ML,y+bh);
-    doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(200,200,200);
-    nl.forEach((l,i)=>doc.text(l,ML+12,y+13+i*13));y+=bh+20;
+window.deleteTripUI = async function(id){ S.trips=S.trips.filter(t=>t.id!==id); renderTrips(); await deleteTripDB(id); toast("Entry deleted") }
+window.downloadTrip = function(id){
+  const tr=S.trips.find(t=>t.id===id); if(!tr) return
+  const{jsPDF}=window.jspdf; const doc=new jsPDF({unit:"pt",format:"a4"})
+  const PW=595,PH=842,ML=48,MR=48,CW=595-96; let y=48
+  function newPage(n){if(y+n>PH-40){doc.addPage();y=48}}
+  doc.setFillColor(10,10,10);doc.rect(0,0,PW,90,"F")
+  if(tr.photos&&tr.photos.length){try{doc.addImage(tr.photos[0],"JPEG",0,0,PW,90)}catch(e){}}
+  doc.setFillColor(0,0,0)
+  try{doc.setGState(new doc.GState({opacity:.55}));doc.rect(0,0,PW,90,"F");doc.setGState(new doc.GState({opacity:1}))}catch(e){}
+  doc.setFont("helvetica","bold");doc.setFontSize(24);doc.setTextColor(232,232,232);doc.text(pdfSafe(tr.place),ML,52)
+  doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(201,169,110);doc.text(pdfSafe(fmtDateShort(tr.date)).toUpperCase(),ML,70)
+  y=90+28
+  if(tr.note){ doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(80,80,80);doc.text("MEMORIES",ML,y);y+=12; const nl=wrapText(doc,pdfSafe(tr.note),CW-16);const bh=nl.length*13+16; doc.setFillColor(16,16,16);doc.rect(ML,y,CW,bh,"F"); doc.setDrawColor(201,169,110);doc.setLineWidth(1.5);doc.line(ML,y,ML,y+bh); doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(200,200,200); nl.forEach((l,i)=>doc.text(l,ML+12,y+13+i*13));y+=bh+20 }
+  if(tr.links&&tr.links.length){ newPage(30+tr.links.length*16); doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(80,80,80);doc.text("LINKS",ML,y);y+=12; tr.links.forEach(l=>{doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(201,169,110);doc.text("— "+pdfSafe(l).slice(0,88),ML,y);try{doc.link(ML,y-9,CW,12,{url:l})}catch(e){}y+=15}) }
+  doc.setFontSize(7);doc.setFont("helvetica","normal");doc.setTextColor(50,50,50)
+  doc.text(`Prettu's Cute Wins  |  Travel Diary  |  ${new Date().toLocaleDateString("en-IN")}`,PW/2,PH-18,{align:"center"})
+  doc.save(`${pdfSafe(tr.place).replace(/\s+/g,"-").toLowerCase()||"trip"}-diary.pdf`)
+  toast(`${tr.place} PDF downloaded`)
+}
+
+/* ─── Settings / confirm ─── */
+let _pendingAction = null
+const CONFIRM_COPY = {
+  resetDaily:  {title:"Reset today?",        sub:"Checkmarks clear. History and notes stay safe.",        btn:"Yes, reset"},
+  resetWeekly: {title:"Reset this week?",    sub:"Weekly task clears. Everything else preserved.",        btn:"Yes, reset"},
+  resetPoints: {title:"Reset points?",       sub:"Score and cat count go to zero. History stays safe.",   btn:"Yes, reset"},
+}
+window.confirmAction = function(action){
+  _pendingAction=action; const c=CONFIRM_COPY[action]
+  document.getElementById("confirmTitle").textContent=c.title
+  document.getElementById("confirmSub").textContent=c.sub
+  document.getElementById("confirmOkBtn").textContent=c.btn
+  document.getElementById("confirmModalBg").classList.add("open")
+}
+window.closeConfirm = function(){ document.getElementById("confirmModalBg").classList.remove("open"); _pendingAction=null }
+window.doConfirmedAction = async function(){
+  closeConfirm()
+  const tk=todayKey(), wk=weekKey()
+  if(_pendingAction==="resetDaily"){
+    const keys=Object.keys(S.completions).filter(k=>k.includes("-"+tk))
+    keys.forEach(k=>delete S.completions[k])
+    await Promise.all(keys.map(k=>deleteCompletion(k)))
+    toast("Daily tasks reset")
+  } else if(_pendingAction==="resetWeekly"){
+    const keys=Object.keys(S.completions).filter(k=>k.includes(wk))
+    keys.forEach(k=>delete S.completions[k])
+    await Promise.all(keys.map(k=>deleteCompletion(k)))
+    toast("Weekly task reset")
+  } else if(_pendingAction==="resetPoints"){
+    S.totalPts=0; S.catsEarned=0
+    await saveState()
+    toast("Points reset")
   }
-  if(tr.links&&tr.links.length){
-    newPage(30+tr.links.length*16);
-    doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setTextColor(80,80,80);doc.text("LINKS",ML,y);y+=12;
-    tr.links.forEach(l=>{doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(201,169,110);doc.text("— "+pdfSafe(l).slice(0,88),ML,y);try{doc.link(ML,y-9,CW,12,{url:l});}catch(e){}y+=15;});
-  }
-  doc.setFontSize(7);doc.setFont("helvetica","normal");doc.setTextColor(50,50,50);
-  doc.text(`Prettu's Cute Wins  |  Travel Diary  |  ${new Date().toLocaleDateString("en-IN")}`,PW/2,PH-18,{align:"center"});
-  doc.save(`${pdfSafe(tr.place).replace(/\s+/g,"-").toLowerCase()||"trip"}-diary.pdf`);
-  toast(`${tr.place} PDF downloaded`);
+  renderAll()
 }
 
-/* ── Confirm ── */
-let _pendingAction=null;
-const CONFIRM_COPY={
-  resetDaily:{title:"Reset today?",sub:"Checkmarks clear. History and notes stay safe.",btn:"Yes, reset"},
-  resetWeekly:{title:"Reset this week?",sub:"Weekly task clears. Everything else preserved.",btn:"Yes, reset"},
-  resetPoints:{title:"Reset points?",sub:"Score and cat count go to zero. History stays safe.",btn:"Yes, reset"},
-};
-function confirmAction(action){
-  _pendingAction=action;const c=CONFIRM_COPY[action];
-  document.getElementById("confirmTitle").textContent=c.title;
-  document.getElementById("confirmSub").textContent=c.sub;
-  document.getElementById("confirmOkBtn").textContent=c.btn;
-  document.getElementById("confirmModalBg").classList.add("open");
-}
-function closeConfirm(){document.getElementById("confirmModalBg").classList.remove("open");_pendingAction=null;}
-function doConfirmedAction(){
-  closeConfirm();const tk=todayKey(),wk=weekKey();
-  if(_pendingAction==="resetDaily"){Object.keys(S.completions).forEach(k=>{if(k.includes("-"+tk))delete S.completions[k];});toast("Daily tasks reset");}
-  else if(_pendingAction==="resetWeekly"){Object.keys(S.completions).forEach(k=>{if(k.includes(wk))delete S.completions[k];});toast("Weekly task reset");}
-  else if(_pendingAction==="resetPoints"){S.totalPts=0;S.catsEarned=0;toast("Points reset");}
-  save(S);renderAll();
+/* ─── Toast ─── */
+function toast(msg, type=""){
+  const z=document.getElementById("toastZone"), el=document.createElement("div")
+  el.className="toast"+(type?" "+type:""); el.textContent=msg; z.appendChild(el)
+  setTimeout(()=>{ el.style.animation="tOut .25s forwards"; setTimeout(()=>el.remove(),250) },2600)
 }
 
-/* ── Toast ── */
-function toast(msg,type=""){
-  const z=document.getElementById("toastZone"),el=document.createElement("div");
-  el.className="toast"+(type?" "+type:"");el.textContent=msg;z.appendChild(el);
-  setTimeout(()=>{el.style.animation="tOut .25s forwards";setTimeout(()=>el.remove(),250);},2600);
-}
-
-/* ── Tabs ── */
+/* ─── Tabs ─── */
 document.querySelectorAll(".tab-btn").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-    document.querySelectorAll(".tab-sec").forEach(s=>s.classList.remove("active"));
-    btn.classList.add("active");
-    const tab=btn.dataset.tab;
-    document.getElementById("tab-"+tab).classList.add("active");
-    if(tab==="rewards")renderRewards();
-    if(tab==="history"){renderHistory();setDefaultDates();}
-    if(tab==="travel")renderTrips();
-  });
-});
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"))
+    document.querySelectorAll(".tab-sec").forEach(s=>s.classList.remove("active"))
+    btn.classList.add("active")
+    const tab=btn.dataset.tab
+    document.getElementById("tab-"+tab).classList.add("active")
+    if(tab==="rewards") renderRewards()
+    if(tab==="history"){ renderHistory(); setDefaultDates() }
+    if(tab==="travel") renderTrips()
+  })
+})
 function setDefaultDates(){
   if(!document.getElementById("exportFrom").value){
-    const weekAgo=new Date();weekAgo.setDate(weekAgo.getDate()-7);
-    document.getElementById("exportFrom").value=weekAgo.toISOString().slice(0,10);
-    document.getElementById("exportTo").value=todayKey();
+    const weekAgo=new Date(); weekAgo.setDate(weekAgo.getDate()-7)
+    document.getElementById("exportFrom").value=weekAgo.toISOString().slice(0,10)
+    document.getElementById("exportTo").value=todayKey()
   }
 }
-document.getElementById("reelInput").addEventListener("keydown",e=>{if(e.key==="Enter")addReel();});
-document.getElementById("noteModalInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.ctrlKey)saveNote();});
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function renderAll(){renderPills();renderProgress();renderTasks();renderReels();}
-renderAll();
+document.getElementById("reelInput").addEventListener("keydown",e=>{ if(e.key==="Enter") window.addReel() })
+document.getElementById("noteModalInput").addEventListener("keydown",e=>{ if(e.key==="Enter"&&e.ctrlKey) window.saveNote() })
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;") }
+function renderAll(){ renderPills(); renderProgress(); renderTasks(); renderReels() }
+
+/* ─── BOOT ─── */
+;(async () => {
+  await loadFromDB()
+  renderAll()
+  document.getElementById("loadingScreen").classList.add("hidden")
+})()
+
+// make toggleTask accessible from onclick
+window.toggleTask = toggleTask
+
 </script>
 </body>
 </html>
